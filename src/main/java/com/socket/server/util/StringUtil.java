@@ -18,7 +18,18 @@ public class StringUtil {
 		
 		return result;
 	}
-
+	
+	public static String[] getProcessArray(String processStr) {
+		if (!isEmpty(processStr)) {
+			return processStr.replaceAll(ProcessStatus.START_SYMBOL, "").split(ProcessStatus.END_SYMBOL_REGEX);
+		}
+		return new String[0];
+	}
+	
+	public static List<String> getProcessList(String processStr) {
+		 return Arrays.asList(getProcessArray(processStr));
+	}
+	
 	public static boolean isEquals(String str1, String str2) {
 		if (str1 == str2) return true;
 		

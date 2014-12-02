@@ -51,8 +51,7 @@
 				beforeSelectRow: function(rowId, e) {
 				},
 				onSelectRow: function(id){ 				
-				},
-				caption: "<table width='100%'><tr><td><b>用户管理</b></td></tr></table>"
+				}
     		});
     		jQuery("#userListTable").jqGrid('navGrid','#userListPager',{add:false,edit:false,del:false});
     	});	
@@ -141,9 +140,12 @@
 </head>
 <body>
 	
-	<jsp:include page="header.jsp" flush="true">	
-		<jsp:param name="currentpageIndex" value="toUserLink" />	
-	</jsp:include>
+	<div style="text-align:right;margin-right:10px;">
+		<a href="toHostManagePage"><button id="hostManageBtn">主机管理</button></a>&nbsp;
+		<a href="toUserManagePage"><button id="userManageBtn">用户管理</button></a>&nbsp;
+		<a href="toRegisterUsrPage"><button id="registerBtn">普通用户注册</button></a>&nbsp;
+		<a href="index"><button id="indexBtn">主页面</button></a>&nbsp;<a href="logout"><button id="logoutBtn">退出</button></a>&nbsp;
+	</div>
 
 	<!-- 分配用户窗口 -->
 	<div id="assignUserWindow" style="z-index:999;display:none;">

@@ -31,7 +31,7 @@ function runCommandForMultipleHost(commandInputStr) {
 		
 		$.ajax({
 			type: "POST",
-			url: "/monitorserver/main/createCommand",
+			url: "/xiaoqubaserver/main/createCommand",
 			data: {hostMacAddress:macAddress,commandStr:commandInputStr},
 			dataType: "json",
 			complete: function(data){				
@@ -61,7 +61,7 @@ function refreshExecutingCommands() {
 			$.ajax({
 		        type: "get",
 		        dataType: "json",
-		        url: "/monitorserver/main/findCommandByIds?commandBatchIds=" + newCommandBatchIds,
+		        url: "/xiaoqubaserver/main/findCommandByIds?commandBatchIds=" + newCommandBatchIds,
 		        complete :function(data) {
 		        	if (data.responseText != "Failed") {
 						var executingCommandsArray = data.responseJSON;

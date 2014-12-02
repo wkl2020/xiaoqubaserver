@@ -49,7 +49,7 @@
         	$("#downloadAgentBtn").html($.i18n.prop('download.agent.label'));
 		
 			$("#hostCommandsTable").jqGrid({
-    			url:'/monitorserver/main/getAssignedHostList',
+    			url:'/xiaoqubaserver/main/getAssignedHostList',
     			datatype: "json",
     			height: 450,
     			colNames:['Process List', 'Free Mem', 'ID', $.i18n.prop('hostname'), $.i18n.prop('mac.address'), $.i18n.prop('cpu.used'), $.i18n.prop('mem.used'), $.i18n.prop('host.status'), $.i18n.prop('process.status'), $.i18n.prop('process.manage'), $.i18n.prop('command.execute'), '<input class="gridparentcheckbox" onclick="clickGridParentCheckbox(this, event)" type="checkbox" />'], 
@@ -100,7 +100,7 @@
 	    			var hostMacAddress = $("#hostCommandsTable").getCell(row_id,"macAddress");
 	    			
 	    			jQuery("#"+subgrid_table_id).jqGrid({
-		    			url:"/monitorserver/main/getHostCommands?hostMacAddress="+hostMacAddress,
+		    			url:"/xiaoqubaserver/main/getHostCommands?hostMacAddress="+hostMacAddress,
 		    			datatype: "json",
 		    			colNames:['ID', $.i18n.prop('mac.address'), $.i18n.prop('command.content'), $.i18n.prop('status'), $.i18n.prop('command.result')], 
 						colModel:[ 
@@ -180,7 +180,7 @@
     		$.ajax({
 	            type: "get",
 	            dataType: "json",
-	            url: "/monitorserver/main/deleteHost?hostId=" + hostId,
+	            url: "/xiaoqubaserver/main/deleteHost?hostId=" + hostId,
 	            complete :function(msg) {
 	            	hostGrid.trigger('reloadGrid');
 	            	closeDelConfirmPopWindowManual();
@@ -216,7 +216,7 @@
     		$.ajax({
 	            type: "get",
 	            dataType: "json",
-	            url: "/monitorserver/main/getAssignedHostList",
+	            url: "/xiaoqubaserver/main/getAssignedHostList",
 	            complete :function(data) {
 		            if (data.responseText != "Failed") {
 						var hostInfoArray = data.responseJSON;//JSON.parse(data.responseText);
@@ -242,7 +242,7 @@
 					var selRowId = $("#hostCommandsTable").jqGrid('getGridParam', 'selrow');					
 					$.ajax({
 						type: "POST",
-						url: "/monitorserver/main/createCommand",
+						url: "/xiaoqubaserver/main/createCommand",
 						data: {hostMacAddress:macAddress,commandStr:commandInputStr},
 						dataType: "json",
 						complete: function(data){
@@ -282,7 +282,7 @@
 				$.ajax({
 					type: "get",
 					dataType: "json",
-					url: "/monitorserver/main/getHostCommands?hostMacAddress=" + hostMacAddress,
+					url: "/xiaoqubaserver/main/getHostCommands?hostMacAddress=" + hostMacAddress,
 					complete :function(data) {						
 						if (data.responseText != "Failed") {
 							var commandArray = data.responseJSON;
@@ -365,15 +365,13 @@
 		</div> 
 	</div>
 	
-	
-	<div class="adminheader">
-		<br />
-		<a id="logout" class="adminheader-a" href="logout">退出</a>&nbsp;
-		<a id="agentdownload" class="adminheader-a" href="agent-download" target="blank"><span id="downloadAgentBtn">Download Agent</span></a>&nbsp;
+	<div style="text-align:right;margin-right:10px;">
+		<a href="logout"><button id="logoutBtn">退出</button></a>&nbsp;<a href="agent-download" target="blank"><button id="downloadAgentBtn">Download Agent</button></a>&nbsp;
+		
 		<c:if test="${roleName.equals('ROLE_ADMIN')}">
-		    <a id="toAdminIndex" class="adminheader-a" href="toAdminPage">进入管理页面</a>
+		    <a href="toAdminPage"><button id="adminBtn">进入管理页面</button></a>
 		</c:if>
-	</div>
+	</div>  
 	
 	<table id="hostCommandsTable"></table>
 	<div id="hostCommandsPager"></div>

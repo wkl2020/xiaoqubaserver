@@ -11,26 +11,5 @@ http://cxf.apache.org/jaxrs http://cxf.apache.org/schemas/jaxrs.xsd">
     <!-- these are included in the dependency jar -->
     <import resource="classpath:META-INF/cxf/cxf.xml"/>
     <import resource="classpath:META-INF/cxf/cxf-servlet.xml"/>
-
-    <!-- rest container -->
-    <jaxrs:server id="hostStatusInfoServiceREST" address="/hostInfo">
-        <jaxrs:serviceBeans>
-            <ref bean="hostInfoServiceRESTGateway"/>
-        </jaxrs:serviceBeans>
-        <jaxrs:providers>
-            <bean class="org.codehaus.jackson.jaxrs.JacksonJsonProvider"/>
-            <bean class="com.server.service.ExceptionHandler"/>
-        </jaxrs:providers>
-    </jaxrs:server>
-    
-    <jaxrs:server id="commandServiceREST" address="/command">
-        <jaxrs:serviceBeans>
-            <ref bean="commandServiceRESTGateway"/>
-        </jaxrs:serviceBeans>
-        <jaxrs:providers>
-            <bean class="org.codehaus.jackson.jaxrs.JacksonJsonProvider"/>
-            <bean class="com.server.service.ExceptionHandler"/>
-        </jaxrs:providers>
-    </jaxrs:server>
        
 </beans>

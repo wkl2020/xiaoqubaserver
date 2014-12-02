@@ -29,7 +29,7 @@
     		
 		
 			$("#unassignedHostTable").jqGrid({
-    			url:'/monitorserver/main/getAllHostList',
+    			url:'/xiaoqubaserver/main/getAllHostList',
     			datatype: "json",
     			height: 450,
     			colNames:['ID', $.i18n.prop('hostname'), $.i18n.prop('mac.address'), $.i18n.prop('userFullname'), $.i18n.prop('enable'), $.i18n.prop('assignUserBtn')], 
@@ -51,8 +51,7 @@
 				beforeSelectRow: function(rowId, e) {
 				},
 				onSelectRow: function(id){ 				
-				},
-				caption: "<table width='100%'><tr><td><b>主机管理</b></td></tr></table>"
+				}
     		});
     		jQuery("#unassignedHostTable").jqGrid('navGrid','#unassignedHostPager',{add:false,edit:false,del:false});
     	});	
@@ -84,7 +83,7 @@
     		$.ajax({
 	            type: "get",
 	            dataType: "json",
-	            url: "/monitorserver/main/deleteHost?hostId=" + hostId,
+	            url: "/xiaoqubaserver/main/deleteHost?hostId=" + hostId,
 	            complete :function(msg) {
 	            	hostGrid.trigger('reloadGrid');
 	            	closeDelConfirmPopWindowManual();
@@ -100,7 +99,7 @@
     		$.ajax({
 	            type: "get",
 	            dataType: "json",
-	            url: "/monitorserver/main/enableHost?hostId="+hostId+"&isEnable="+isEnable,
+	            url: "/xiaoqubaserver/main/enableHost?hostId="+hostId+"&isEnable="+isEnable,
 	            complete :function(result) {
 	            	jQuery("#unassignedHostTable").trigger('reloadGrid');
 	            	closeAssignUserPopWindowManual();
@@ -125,7 +124,7 @@
     		$.ajax({
 	            type: "get",
 	            dataType: "json",
-	            url: "/monitorserver/main/assginUserToHost?hostId="+hostId+"&userId="+userId,
+	            url: "/xiaoqubaserver/main/assginUserToHost?hostId="+hostId+"&userId="+userId,
 	            complete :function(result) {
 	            	jQuery("#unassignedHostTable").trigger('reloadGrid');
 	            	closeAssignUserPopWindowManual();
@@ -140,9 +139,12 @@
 </head>
 <body>
 	
-	<jsp:include page="header.jsp" flush="true">	
-		<jsp:param name="currentpageIndex" value="toHostManageLink" />	
-	</jsp:include>
+	<div style="text-align:right;margin-right:10px;">
+		<a href="toHostManagePage"><button id="hostManageBtn">主机管理</button></a>&nbsp;
+		<a href="toUserManagePage"><button id="userManageBtn">用户管理</button></a>&nbsp;
+		<a href="toRegisterUsrPage"><button id="registerBtn">普通用户注册</button></a>&nbsp;
+		<a href="index"><button id="indexBtn">主页面</button></a>&nbsp;<a href="logout"><button id="logoutBtn">退出</button></a>&nbsp;
+	</div>
 
 	<!-- 分配用户窗口 -->
 	<div id="assignUserWindow" style="z-index:999;display:none;">

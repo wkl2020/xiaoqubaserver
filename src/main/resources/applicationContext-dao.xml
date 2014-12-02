@@ -12,7 +12,7 @@
            http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa-1.0.xsd">
 
     <context:annotation-config/>
-    <context:component-scan base-package="com.server"/>
+    <context:component-scan base-package="com.luckyryan.sample"/>
 
     <!-- BoneCP configuration -->
     <bean id="mainDataSource" class="com.jolbox.bonecp.BoneCPDataSource" destroy-method="close">
@@ -32,7 +32,7 @@
 
     <!-- SPRING - JPA -->
     <jpa:repositories
-            base-package="com.server.dao"/>
+            base-package="com.luckyryan.sample.dao"/>
 
     <bean class="org.springframework.orm.jpa.JpaTransactionManager"
           id="transactionManager">
@@ -48,7 +48,7 @@
     <bean id="entityManagerFactory"
           class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
         <property name="dataSource" ref="mainDataSource"/>
-        <property name="packagesToScan" value="com.server.dao.model"/>
+        <property name="packagesToScan" value="com.luckyryan.sample.dao.model"/>
         <property name="jpaVendorAdapter">
             <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
                 <property name="generateDdl" value="true"/>

@@ -24,7 +24,7 @@ function commitProcessCommand() {
 	
 		$.ajax({
 			type: "POST",
-			url: "/monitorserver/main/editHostProcessList",
+			url: "/xiaoqubaserver/main/editHostProcessList",
 			data: {macAddress:macAddress,processList:processListStr},
 			dataType: "json",
 			complete :function(data) {
