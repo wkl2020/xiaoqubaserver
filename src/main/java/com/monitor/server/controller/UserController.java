@@ -20,8 +20,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-
-import com.luckyryan.sample.dao.model.HostStatusInfo;
 import com.luckyryan.sample.dao.model.UserEntity;
 import com.luckyryan.sample.service.UserServiceImpl;
 import com.socket.server.util.StringUtil;

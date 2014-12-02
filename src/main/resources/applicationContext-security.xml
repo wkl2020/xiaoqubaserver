@@ -6,37 +6,33 @@
      
     <http auto-config="true" use-expressions="false">  
     	
-    	<!-- Admin & User -->
-		<intercept-url pattern="/main/index" access="ROLE_ADMIN,ROLE_USER" />  
+    	<!-- Admin & User
+		<intercept-url pattern="/main/index" access="ROLE_ADMIN,ROLE_USER" />   -->
 		<!--  <intercept-url pattern="/main/security-error" access="ROLE_ADMIN,ROLE_USER" />		
 		<intercept-url pattern="/main/login.html" access="ROLE_ADMIN,ROLE_USER" />  
 		<intercept-url pattern="/main/denied" access="ROLE_ADMIN,ROLE_USER" />  
 		<intercept-url pattern="/main/logout" access="ROLE_ADMIN,ROLE_USER" />  -->
-		<intercept-url pattern="/main/getAssignedHostList" access="ROLE_ADMIN,ROLE_USER" />  
-		<intercept-url pattern="/main/editHostProcessList" access="ROLE_ADMIN,ROLE_USER" />
-		<intercept-url pattern="/main/command" access="ROLE_ADMIN,ROLE_USER" />
-		<intercept-url pattern="/main/commandlist" access="ROLE_ADMIN,ROLE_USER" />
-		<intercept-url pattern="/main/getHostCommands" access="ROLE_ADMIN,ROLE_USER" />
-		<intercept-url pattern="/main/createCommand" access="ROLE_ADMIN,ROLE_USER" />
-		<intercept-url pattern="/main/findCommandByIds" access="ROLE_ADMIN,ROLE_USER" />
-		<intercept-url pattern="/main/agent-download" access="ROLE_ADMIN,ROLE_USER" />		
-		 
-		 <!-- Admin -->
+		  
+		<!-- <intercept-url pattern="/main/editHostProcessList" access="ROLE_ADMIN,ROLE_USER" /> -->		 
+		<!-- <intercept-url pattern="/main/toRegisterUsrPage" access="ROLE_ADMIN" /> -->   
+		<!-- <intercept-url pattern="/main/getAllUserList" access="ROLE_ADMIN" />
+		<intercept-url pattern="/main/createUser" access="ROLE_ADMIN" />   -->   
+		
+		 <!-- Admin
         <intercept-url pattern="/main/admin" access="ROLE_ADMIN" />
 		<intercept-url pattern="/main/toAdminPage" access="ROLE_ADMIN" />  
-		<intercept-url pattern="/main/toUserManagePage" access="ROLE_ADMIN" />  
-		<intercept-url pattern="/main/toRegisterUsrPage" access="ROLE_ADMIN" />   
-		<intercept-url pattern="/main/getAllUserList" access="ROLE_ADMIN" />  
-		<intercept-url pattern="/main/createUser" access="ROLE_ADMIN" />  
+		<intercept-url pattern="/main/toUserManagePage" access="ROLE_ADMIN" />
 		<intercept-url pattern="/main/changeUserPwd" access="ROLE_ADMIN" />    
 		<intercept-url pattern="/main/enableUser" access="ROLE_ADMIN" />  
 		<intercept-url pattern="/main/deleteUser" access="ROLE_ADMIN" />   
+		 -->
 		
+		<!--
 		<intercept-url pattern="/main/toHostManagePage" access="ROLE_ADMIN" />  
 		<intercept-url pattern="/main/getAllHostList" access="ROLE_ADMIN" />  
 		<intercept-url pattern="/main/enableHost" access="ROLE_ADMIN" />   
 		<intercept-url pattern="/main/deleteHost" access="ROLE_ADMIN" />
-		<intercept-url pattern="/main/assginUserToHost" access="ROLE_ADMIN" />
+		<intercept-url pattern="/main/assginUserToHost" access="ROLE_ADMIN" />  -->   
         
         
         <anonymous username="guest" granted-authority="ROLE_GUEST" />  

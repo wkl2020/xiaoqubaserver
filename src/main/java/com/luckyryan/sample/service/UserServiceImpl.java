@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.luckyryan.sample.dao.UserDao;
-import com.luckyryan.sample.dao.model.HostStatusInfo;
 import com.luckyryan.sample.dao.model.UserEntity;
 import com.luckyryan.sample.exception.InvalidDataException;
 
