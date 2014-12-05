@@ -13,11 +13,13 @@
     <!-- Process annotations on registered beans like @Autowired... -->
     <context:annotation-config/>
     
+    <!-- 
     <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
  		<property name="locations">  
            <list>  
               <value>classpath:constantsutil.properties</value>
-              <value>classpath:db.properties</value>  
+              <value>classpath:db.properties</value>
+              <value>classpath:jdbc.properties</value>
             </list>  
         </property>  
 	</bean>
@@ -27,5 +29,6 @@
  		<property name="agentDownloadFilename" value="${agent.download.filename}"></property>
  		
 	</bean>
-
+ 	-->
+ 	
 </beans>

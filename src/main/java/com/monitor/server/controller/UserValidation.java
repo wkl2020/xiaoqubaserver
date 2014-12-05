@@ -4,7 +4,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 
-import com.luckyryan.sample.dao.model.UserEntity;
+import com.luckyryan.sample.model.UserEntity;
 
 @Component("userValidator")
 public class UserValidation {
@@ -31,7 +31,7 @@ public class UserValidation {
 				"用户名不能多与50个字符.");
 		}
 		
-		if (!(registration.getPassword()).equals(registration.getConfirmPassword())) {
+		if (!(registration.getPassword()).equals(registration.getConfirmpassword())) {
 			errors.rejectValue("password",
 				"matchingPassword.registration.password",
 				"密码和确认密码不匹配.");

@@ -7,64 +7,70 @@
        xmlns:aop="http://www.springframework.org/schema/aop"
        xmlns:p="http://www.springframework.org/schema/p"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+       		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd
 	 	   http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.2.xsd
            http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa-1.0.xsd">
 
-    <context:annotation-config/>
+	<aop:aspectj-autoproxy />
+	<context:annotation-config/>
     <context:component-scan base-package="com.luckyryan.sample"/>
 
-    <!-- BoneCP configuration -->
-    <bean id="mainDataSource" class="com.jolbox.bonecp.BoneCPDataSource" destroy-method="close">
-        <property name="driverClass" value="org.postgresql.Driver"/>
-        <property name="jdbcUrl" value="${jdbc.url}"/>
-        <property name="username" value="${jdbc.username}"/>
-        <property name="password" value="${jdbc.password}"/>
-        <property name="idleConnectionTestPeriodInMinutes" value="60"/>
-        <property name="idleMaxAgeInMinutes" value="240"/>
-        <property name="maxConnectionsPerPartition" value="30"/>
-        <property name="minConnectionsPerPartition" value="10"/>
-        <property name="partitionCount" value="3"/>
-        <property name="acquireIncrement" value="5"/>
-        <property name="statementsCacheSize" value="100"/>
-        <property name="releaseHelperThreads" value="3"/>
-    </bean>
+	<bean id="propertyConfigurer"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"
+		p:location="classpath:jdbc.properties" />
 
-    <!-- SPRING - JPA -->
-    <jpa:repositories
-            base-package="com.luckyryan.sample.dao"/>
+	<!-- ADD PERSISTENCE SUPPORT HERE (jpa, hibernate, etc) -->
 
-    <bean class="org.springframework.orm.jpa.JpaTransactionManager"
-          id="transactionManager">
-        <property name="entityManagerFactory"
-                  ref="entityManagerFactory"/>
-        <property name="jpaDialect">
-            <bean class="org.springframework.orm.jpa.vendor.HibernateJpaDialect"/>
-        </property>
-    </bean>
-    
-    <tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true" />
+	<!-- 阿里巴巴链接池配置 -->
+	<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource"
+		init-method="init" destroy-method="close">
+		<property name="url" value="${jdbc.url}" />
+		<property name="username" value="${jdbc.user}" />
+		<property name="password" value="${jdbc.password}" />
 
-    <bean id="entityManagerFactory"
-          class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
-        <property name="dataSource" ref="mainDataSource"/>
-        <property name="packagesToScan" value="com.luckyryan.sample.dao.model"/>
-        <property name="jpaVendorAdapter">
-            <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
-                <property name="generateDdl" value="true"/>
-                <property name="showSql" value="false"/>
-                <property name="databasePlatform" value="org.hibernate.dialect.PostgreSQLDialect"/>
-                <property name="database" value="POSTGRESQL"/>
-            </bean>
-        </property>
-        <property name="jpaProperties">
-            <value>
-                hibernate.cache.use_second_level_cache = true
-                hibernate.cache.region.factory_class = org.hibernate.cache.ehcache.EhCacheRegionFactory
-                hibernate.cache.use_query_cache = true
-                hibernate.generate_statistics = true
-            </value>
-        </property>
-    </bean>
+
+	</bean>
+
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<!--dataSource属性指定要用到的连接池 -->
+		<property name="dataSource" ref="dataSource" />
+		<!--configLocation属性指定mybatis的核心配置文件 -->
+		<property name="configLocation" value="classpath:mybatis-config.xml" />
+		<!-- 所有配置的mapper文件 -->
+		<property name="mapperLocations"
+			value="classpath*:resources/com/luckyryan/sample/persistence/*.xml" />
+	</bean>
+
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="com.luckyryan.sample.persistence" />
+	</bean>
+
+	<bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager"
+		p:dataSource-ref="dataSource" />
+
+	<!-- <tx:annotation-driven transaction-manager="transactionManager" /> -->
+
+	<aop:config>
+		<aop:pointcut id="myPointCut"
+			expression="execution(* com.luckyryan.sample.service..*.*(..))" />
+		<aop:advisor pointcut-ref="myPointCut" advice-ref="txAdvice" />
+	</aop:config>
+
+	<tx:advice id="txAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="get*" read-only="true" />
+			<tx:method name="userLogin" read-only="true" />
+			<tx:method name="find*" read-only="true" />
+			<tx:method name="delete*" />
+			<tx:method name="enable*" />
+			<tx:method name="change*" />						
+			<tx:method name="save*" />
+			<tx:method name="update*" />
+			<tx:method name="insert*" />
+			<tx:method name="*" propagation="SUPPORTS" />
+		</tx:attributes>
+	</tx:advice>
 
 </beans>

@@ -51,7 +51,7 @@
         <authentication-provider> 
         	
         	<jdbc-user-service id="userService1"
-				data-source-ref="mainDataSource"
+				data-source-ref="dataSource"
 				users-by-username-query="select username, password, 1 from userentity where username=? and enable=true"
 				authorities-by-username-query="select u.username username, u.role rolename from userentity u where u.username=?" />
  			<password-encoder hash="md5" />

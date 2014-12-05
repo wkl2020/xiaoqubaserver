@@ -1,4 +1,4 @@
-package com.luckyryan.sample.service;
+package com.luckyryan.sample.service.impl;
 
 import java.util.Date;
 import java.util.List;
@@ -6,19 +6,31 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.luckyryan.sample.dao.UserDao;
-import com.luckyryan.sample.dao.model.UserEntity;
 import com.luckyryan.sample.exception.InvalidDataException;
+import com.luckyryan.sample.model.UserEntity;
+import com.luckyryan.sample.model.UserEntityExample;
+import com.luckyryan.sample.persistence.UserEntityMapper;
+import com.luckyryan.sample.service.UserService;
+
+
 
 @Service("userService")
 public class UserServiceImpl implements UserService {
 	
 	@Autowired
-	private UserDao userDao;
+	UserEntityMapper userEntityMapper;
+
+	public UserEntityMapper getUserEntityMapper() {
+		return userEntityMapper;
+	}
+
+	public void setUserEntityMapper(UserEntityMapper userEntityMapper) {
+		this.userEntityMapper = userEntityMapper;
+	}
 
 	@Override
 	public String userLogin(UserEntity user) {
-		UserEntity currentUser = userDao.findByUsername(user.getUsername());
+		UserEntity currentUser = userEntityMapper.selectByUsername(user.getUsername());
 		
 		if (currentUser != null && currentUser.getPassword().equals(user.getPassword())) {
             return "success";  
@@ -27,43 +39,39 @@ public class UserServiceImpl implements UserService {
         }  
 	}
 	
-	public UserEntity saveUser(UserEntity user)
+	public int saveUser(UserEntity user)
 			throws InvalidDataException {
 		
-		user.setCreateDate(new Date());
-		user.setUpdateDate(new Date());
-		return userDao.save(user);
+		user.setCreatedate(new Date());
+		user.setUpdatedate(new Date());
+		return userEntityMapper.insert(user);
 	}
 	
 	public UserEntity findUserByUsername(String username) throws InvalidDataException {
 		
-		return userDao.findByUsername(username);
-	}
+		return userEntityMapper.selectByUsername(username);
+	}	
 	
-	public List<UserEntity> findAll() throws InvalidDataException {
-		
-		return (List<UserEntity>)userDao.findAll();
+	@Override
+	public List<UserEntity> findAll() {
+		UserEntityExample userExample = new UserEntityExample();
+		return this.userEntityMapper.selectByExample(userExample);
 	}
 
 	@Override
-	public String deleteUser(Long userId) throws InvalidDataException {
-		try {
-			userDao.delete(userId);
-		} catch (Exception e) {
-			return "Error: " + e.getMessage();
-		}
-		return "success";
+	public int deleteUser(Long userId) throws InvalidDataException {
+		return userEntityMapper.deleteByPrimaryKey(userId);
 	}
 	
 	@Override
 	public String enableUser(Long userId, Boolean isEnable) throws InvalidDataException {
 		String result = "success";
 		try {
-			UserEntity user = userDao.findOne(userId);
+			UserEntity user = userEntityMapper.selectByPrimaryKey(userId);
 			
 			if (user != null) {
 				user.setEnable(isEnable);
-				userDao.save(user);
+				userEntityMapper.insert(user);
 			} else {
 				result = "Failed";
 			}			
@@ -81,12 +89,12 @@ public class UserServiceImpl implements UserService {
 	public String changeUserPwd(Long userId, String newPwd) throws InvalidDataException {
 		String result = "success";
 		try {
-			UserEntity user = userDao.findOne(userId);
+			UserEntity user = userEntityMapper.selectByPrimaryKey(userId);
 			
 			if (user != null) {
 				user.setPassword(newPwd);
-				user.setConfirmPassword(newPwd);
-				userDao.save(user);
+				user.setConfirmpassword(newPwd);
+				userEntityMapper.insert(user);
 			} else {
 				result = "Failed";
 			}			

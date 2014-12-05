@@ -13,8 +13,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import com.luckyryan.sample.dao.model.UserEntity;
-import com.luckyryan.sample.service.UserServiceImpl;
+
+import com.luckyryan.sample.model.UserEntity;
+import com.luckyryan.sample.service.UserService;
+
 
 
 /**
@@ -25,9 +27,9 @@ import com.luckyryan.sample.service.UserServiceImpl;
 public class IndexController {
 	
 	@Autowired
-	private UserServiceImpl userService;
-
-    private final String PAGE_INDEX = "index";
+	UserService userService;
+	
+	private final String PAGE_INDEX = "index";
 
     @RequestMapping(value = "/index", method = RequestMethod.GET)
     public ModelAndView viewStatus(HttpSession session, HttpServletRequest request) {

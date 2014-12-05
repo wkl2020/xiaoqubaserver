@@ -20,15 +20,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-import com.luckyryan.sample.dao.model.UserEntity;
-import com.luckyryan.sample.service.UserServiceImpl;
+
+import com.luckyryan.sample.model.UserEntity;
+import com.luckyryan.sample.service.UserService;
 import com.socket.server.util.StringUtil;
 
 @Controller
 public class UserController {
 	
 	 @Autowired
-	 private UserServiceImpl userService;
+	 UserService userService;
 		
 	@Autowired
 	private UserValidation userValidation; // 用户自定义验证
@@ -87,9 +88,9 @@ public class UserController {
 		 
 		 try {
 			 user.setPassword(StringUtil.makeMD5(user.getPassword()));
-			 user.setConfirmPassword(StringUtil.makeMD5(user.getConfirmPassword()));
-			 UserEntity newUser = userService.saveUser(user);
-			 if (newUser.getId() != null) {
+			 user.setConfirmpassword((StringUtil.makeMD5(user.getConfirmpassword())));
+			 
+			 if (userService.saveUser(user) > 0) {
 				 return "admin";
 			 }
 		 } catch (Exception e) {			 
@@ -156,8 +157,7 @@ public class UserController {
 		String result = "success";
     	System.out.println("delete user: userId: " + userId);
     	
-    	if (!StringUtil.isEmpty(userId)) {
-    		result = userService.deleteUser(Long.valueOf(userId));
+    	if (!StringUtil.isEmpty(userId) && userService.deleteUser(Long.valueOf(userId)) > 0) {
     	} else {
     		result = "Failed";
     	}

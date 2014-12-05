@@ -54,7 +54,7 @@
 			<td>确认密码: </td>
 		</tr>
 		<tr>
-			<td><form:password path="confirmPassword" /> <FONT color="red"><form:errors path="confirmPassword" /></FONT></td>
+			<td><form:password path="confirmpassword" /> <FONT color="red"><form:errors path="confirmpassword" /></FONT></td>
 		</tr>
 		
 		<tr>

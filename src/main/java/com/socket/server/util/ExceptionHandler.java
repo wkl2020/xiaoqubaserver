@@ -1,4 +1,4 @@
-package com.luckyryan.sample.service;
+package com.socket.server.util;
 
 import com.luckyryan.sample.exception.InvalidDataException;
 
