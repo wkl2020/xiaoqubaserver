@@ -11,8 +11,8 @@ public interface UserService {
 	 public int saveUser(UserEntity user);
 	 
 	 public List<UserEntity> findAll() throws InvalidDataException;
-	 public int deleteUser(Long userId) throws InvalidDataException;
-	 public String enableUser(Long userId, Boolean isEnable) throws InvalidDataException;
-	 public String changeUserPwd(Long userId, String newPwd) throws InvalidDataException;
+	 public int deleteUser(Integer userId) throws InvalidDataException;
+	 public String enableUser(Integer userId, Boolean isEnable) throws InvalidDataException;
+	 public String changeUserPwd(Integer userId, String newPwd) throws InvalidDataException;
 	 public UserEntity findUserByUsername(String username) throws InvalidDataException;
 }

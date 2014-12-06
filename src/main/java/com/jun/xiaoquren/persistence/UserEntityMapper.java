@@ -1,23 +1,16 @@
 package com.jun.xiaoquren.persistence;
 
-import java.util.List;
-
 import com.jun.xiaoquren.model.UserEntity;
 import com.jun.xiaoquren.model.UserEntityExample;
-
+import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
-/**
- * User: ryan
- * Date: 2/20/13
- */
-public interface UserEntityMapper {	
-
+public interface UserEntityMapper {
     int countByExample(UserEntityExample example);
 
     int deleteByExample(UserEntityExample example);
 
-    int deleteByPrimaryKey(Long id);
+    int deleteByPrimaryKey(Integer id);
 
     int insert(UserEntity record);
 
@@ -25,7 +18,7 @@ public interface UserEntityMapper {
 
     List<UserEntity> selectByExample(UserEntityExample example);
 
-    UserEntity selectByPrimaryKey(Long id);
+    UserEntity selectByPrimaryKey(Integer id);
     
     UserEntity selectByUsername(String username);
 

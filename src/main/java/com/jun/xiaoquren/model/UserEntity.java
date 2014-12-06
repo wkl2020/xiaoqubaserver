@@ -3,11 +3,9 @@ package com.jun.xiaoquren.model;
 import java.util.Date;
 
 public class UserEntity {
-    private Long id;
+    private Integer id;
 
-    private String confirmpassword;
-
-    private Date createdate;
+    private String confirmPassword;
 
     private String email;
 
@@ -17,38 +15,46 @@ public class UserEntity {
 
     private String lastname;
 
+    private String username;
+
     private String password;
 
     private String phone;
 
     private String role;
 
-    private Date updatedate;
+    private String token;
 
-    private String username;
+    private String nickname;
 
-    public Long getId() {
+    private String address;
+
+    private Long xiaoquId;
+
+    private String companyName;
+
+    private Boolean deleted;
+
+    private Long version;
+
+    private Date createDate;
+
+    private Date updateDate;
+
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public String getConfirmpassword() {
-        return confirmpassword;
+    public String getConfirmPassword() {
+        return confirmPassword;
     }
 
-    public void setConfirmpassword(String confirmpassword) {
-        this.confirmpassword = confirmpassword == null ? null : confirmpassword.trim();
-    }
-
-    public Date getCreatedate() {
-        return createdate;
-    }
-
-    public void setCreatedate(Date createdate) {
-        this.createdate = createdate;
+    public void setConfirmPassword(String confirmPassword) {
+        this.confirmPassword = confirmPassword == null ? null : confirmPassword.trim();
     }
 
     public String getEmail() {
@@ -83,6 +89,14 @@ public class UserEntity {
         this.lastname = lastname == null ? null : lastname.trim();
     }
 
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username == null ? null : username.trim();
+    }
+
     public String getPassword() {
         return password;
     }
@@ -107,19 +121,75 @@ public class UserEntity {
         this.role = role == null ? null : role.trim();
     }
 
-    public Date getUpdatedate() {
-        return updatedate;
+    public String getToken() {
+        return token;
     }
 
-    public void setUpdatedate(Date updatedate) {
-        this.updatedate = updatedate;
+    public void setToken(String token) {
+        this.token = token == null ? null : token.trim();
     }
 
-    public String getUsername() {
-        return username;
+    public String getNickname() {
+        return nickname;
     }
 
-    public void setUsername(String username) {
-        this.username = username == null ? null : username.trim();
+    public void setNickname(String nickname) {
+        this.nickname = nickname == null ? null : nickname.trim();
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address == null ? null : address.trim();
+    }
+
+    public Long getXiaoquId() {
+        return xiaoquId;
+    }
+
+    public void setXiaoquId(Long xiaoquId) {
+        this.xiaoquId = xiaoquId;
+    }
+
+    public String getCompanyName() {
+        return companyName;
+    }
+
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName == null ? null : companyName.trim();
+    }
+
+    public Boolean getDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(Boolean deleted) {
+        this.deleted = deleted;
+    }
+
+    public Long getVersion() {
+        return version;
+    }
+
+    public void setVersion(Long version) {
+        this.version = version;
+    }
+
+    public Date getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
+    }
+
+    public Date getUpdateDate() {
+        return updateDate;
+    }
+
+    public void setUpdateDate(Date updateDate) {
+        this.updateDate = updateDate;
     }
 }

@@ -44,9 +44,11 @@ public class UserServiceImpl implements UserService {
 	public int saveUser(UserEntity user)
 			throws InvalidDataException {
 		
-		user.setCreatedate(new Date());
-		user.setUpdatedate(new Date());
+		user.setCreateDate(new Date());
+		user.setUpdateDate(new Date());
 		user.setEnable(true);
+		user.setDeleted(false);
+		user.setVersion(0l);
 		if (StringUtil.isEmpty(user.getRole())) {
 			user.setRole(UserRole.ANONYM);
 		}
@@ -65,12 +67,12 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public int deleteUser(Long userId) throws InvalidDataException {
+	public int deleteUser(Integer userId) throws InvalidDataException {
 		return userEntityMapper.deleteByPrimaryKey(userId);
 	}
 	
 	@Override
-	public String enableUser(Long userId, Boolean isEnable) throws InvalidDataException {
+	public String enableUser(Integer userId, Boolean isEnable) throws InvalidDataException {
 		String result = "success";
 		try {
 			UserEntity user = userEntityMapper.selectByPrimaryKey(userId);
@@ -92,14 +94,14 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	@Override
-	public String changeUserPwd(Long userId, String newPwd) throws InvalidDataException {
+	public String changeUserPwd(Integer userId, String newPwd) throws InvalidDataException {
 		String result = "success";
 		try {
 			UserEntity user = userEntityMapper.selectByPrimaryKey(userId);
 			
 			if (user != null) {
 				user.setPassword(newPwd);
-				user.setConfirmpassword(newPwd);
+				user.setConfirmPassword(newPwd);
 				userEntityMapper.updateByPrimaryKey(user);
 			} else {
 				result = "Failed";

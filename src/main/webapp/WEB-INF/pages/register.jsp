@@ -54,7 +54,7 @@
 			<td>确认密码* </td>
 		</tr>
 		<tr>
-			<td><form:password path="confirmpassword" /> <FONT color="red"><form:errors path="confirmpassword" /></FONT></td>
+			<td><form:password path="confirmPassword" /> <FONT color="red"><form:errors path="confirmPassword" /></FONT></td>
 		</tr>
 		
 		<tr>
@@ -69,6 +69,34 @@
 		</tr>
 		<tr>
 			<td><form:input path="lastname" /> <FONT color="red"><form:errors path="lastname" /></FONT></td>
+		</tr>
+		
+		<tr>
+			<td>昵称: </td>
+		</tr>
+		<tr>
+			<td><form:input path="nickname" /> <FONT color="red"><form:errors path="nickname" /></FONT></td>
+		</tr>
+		
+		<tr>
+			<td>地址: </td>
+		</tr>
+		<tr>
+			<td><form:input path="address" /> <FONT color="red"><form:errors path="address" /></FONT></td>
+		</tr>
+		
+		<tr>
+			<td>公司名称: </td>
+		</tr>
+		<tr>
+			<td><form:input path="companyName" /> <FONT color="red"><form:errors path="companyName" /></FONT></td>
+		</tr>
+		
+		<tr>
+			<td>小区ID: </td>
+		</tr>
+		<tr>
+			<td><form:input path="xiaoquId" /> <FONT color="red"><form:errors path="xiaoquId" /></FONT></td>
 		</tr>
 		
 		<tr>

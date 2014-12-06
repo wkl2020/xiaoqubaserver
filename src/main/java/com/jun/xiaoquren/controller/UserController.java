@@ -99,7 +99,7 @@ public class UserController {
 		 
 		 try {
 			 user.setPassword(StringUtil.makeMD5(user.getPassword()));
-			 user.setConfirmpassword((StringUtil.makeMD5(user.getConfirmpassword())));
+			 user.setConfirmPassword((StringUtil.makeMD5(user.getConfirmPassword())));
 			 
 			 if (userService.saveUser(user) > 0) {
 				 return "admin";
@@ -133,7 +133,7 @@ public class UserController {
     	System.out.println("enableUser: userId: " + userId + " : newPwd: " + newPwd);
     	
     	if (!StringUtil.isEmpty(userId) && !StringUtil.isEmpty(newPwd)) {
-    		result = userService.changeUserPwd(Long.valueOf(userId), StringUtil.makeMD5(newPwd));
+    		result = userService.changeUserPwd(Integer.valueOf(userId), StringUtil.makeMD5(newPwd));
     	} else {
     		result = "Failed";
     	}
@@ -151,7 +151,7 @@ public class UserController {
     	System.out.println("enableUser: userId: " + userId + " : isEnable: " + isEnable);
     	
     	if (!StringUtil.isEmpty(userId) && isEnable != null) {
-    		result = userService.enableUser(Long.valueOf(userId), isEnable);
+    		result = userService.enableUser(Integer.valueOf(userId), isEnable);
     	} else {
     		result = "Failed";
     	}
@@ -168,7 +168,7 @@ public class UserController {
 		String result = "success";
     	System.out.println("delete user: userId: " + userId);
     	
-    	if (!StringUtil.isEmpty(userId) && userService.deleteUser(Long.valueOf(userId)) > 0) {
+    	if (!StringUtil.isEmpty(userId) && userService.deleteUser(Integer.valueOf(userId)) > 0) {
     	} else {
     		result = "Failed";
     	}

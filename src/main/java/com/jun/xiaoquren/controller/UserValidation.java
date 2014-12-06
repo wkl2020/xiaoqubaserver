@@ -31,7 +31,7 @@ public class UserValidation {
 				"用户名不能多与50个字符.");
 		}
 		
-		if (!(registration.getPassword()).equals(registration.getConfirmpassword())) {
+		if (!(registration.getPassword()).equals(registration.getConfirmPassword())) {
 			errors.rejectValue("password",
 				"matchingPassword.registration.password",
 				"密码和确认密码不匹配.");

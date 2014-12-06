@@ -2,18 +2,25 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.jun.xiaoquren.persistence.UserEntityMapper" >
   <resultMap id="BaseResultMap" type="com.jun.xiaoquren.model.UserEntity" >
-    <id column="id" property="id" jdbcType="BIGINT" />
-    <result column="confirmpassword" property="confirmpassword" jdbcType="VARCHAR" />
-    <result column="createdate" property="createdate" jdbcType="TIMESTAMP" />
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="confirm_password" property="confirmPassword" jdbcType="VARCHAR" />
     <result column="email" property="email" jdbcType="VARCHAR" />
     <result column="enable" property="enable" jdbcType="BIT" />
     <result column="firstname" property="firstname" jdbcType="VARCHAR" />
     <result column="lastname" property="lastname" jdbcType="VARCHAR" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
     <result column="password" property="password" jdbcType="VARCHAR" />
     <result column="phone" property="phone" jdbcType="VARCHAR" />
     <result column="role" property="role" jdbcType="VARCHAR" />
-    <result column="updatedate" property="updatedate" jdbcType="TIMESTAMP" />
-    <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="token" property="token" jdbcType="VARCHAR" />
+    <result column="nickname" property="nickname" jdbcType="VARCHAR" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="xiaoqu_id" property="xiaoquId" jdbcType="BIGINT" />
+    <result column="company_name" property="companyName" jdbcType="VARCHAR" />
+    <result column="deleted" property="deleted" jdbcType="BIT" />
+    <result column="version" property="version" jdbcType="BIGINT" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -74,8 +81,9 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, confirmpassword, createdate, email, enable, firstname, lastname, password, phone, 
-    role, updatedate, username
+    id, confirm_password, email, enable, firstname, lastname, username, password, phone, 
+    role, token, nickname, address, xiaoqu_id, company_name, deleted, version, create_date, 
+    update_date
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jun.xiaoquren.model.UserEntityExample" >
     select
@@ -91,11 +99,11 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
     from userentity
-    where id = #{id,jdbcType=BIGINT}
+    where id = #{id,jdbcType=INTEGER}
   </select>
   <select id="selectByUsername" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
@@ -103,9 +111,9 @@
     from userentity
     where username = #{username,jdbcType=VARCHAR}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from userentity
-    where id = #{id,jdbcType=BIGINT}
+    where id = #{id,jdbcType=INTEGER}
   </delete>
   <delete id="deleteByExample" parameterType="com.jun.xiaoquren.model.UserEntityExample" >
     delete from userentity
@@ -113,17 +121,21 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.jun.xiaoquren.model.UserEntity">
-    insert into userentity (confirmpassword, createdate, 
-      email, enable, firstname, 
-      lastname, password, phone, 
-      role, updatedate, username
-      )
-    values (#{confirmpassword,jdbcType=VARCHAR}, #{createdate,jdbcType=TIMESTAMP}, 
-      #{email,jdbcType=VARCHAR}, #{enable,jdbcType=BIT}, #{firstname,jdbcType=VARCHAR}, 
-      #{lastname,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
-      #{role,jdbcType=VARCHAR}, #{updatedate,jdbcType=TIMESTAMP}, #{username,jdbcType=VARCHAR}
-      )
+  <insert id="insert" parameterType="com.jun.xiaoquren.model.UserEntity" >
+    insert into userentity (confirm_password, email, 
+      enable, firstname, lastname, 
+      username, password, phone, 
+      role, token, nickname, 
+      address, xiaoqu_id, company_name, 
+      deleted, version, create_date, 
+      update_date)
+    values (#{confirmPassword,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
+      #{enable,jdbcType=BIT}, #{firstname,jdbcType=VARCHAR}, #{lastname,jdbcType=VARCHAR}, 
+      #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
+      #{role,jdbcType=VARCHAR}, #{token,jdbcType=VARCHAR}, #{nickname,jdbcType=VARCHAR}, 
+      #{address,jdbcType=VARCHAR}, #{xiaoquId,jdbcType=BIGINT}, #{companyName,jdbcType=VARCHAR}, 
+      #{deleted,jdbcType=BIT}, #{version,jdbcType=BIGINT}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{updateDate,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.jun.xiaoquren.model.UserEntity" >
     insert into userentity
@@ -131,11 +143,8 @@
       <if test="id != null" >
         id,
       </if>
-      <if test="confirmpassword != null" >
-        confirmpassword,
-      </if>
-      <if test="createdate != null" >
-        createdate,
+      <if test="confirmPassword != null" >
+        confirm_password,
       </if>
       <if test="email != null" >
         email,
@@ -149,6 +158,9 @@
       <if test="lastname != null" >
         lastname,
       </if>
+      <if test="username != null" >
+        username,
+      </if>
       <if test="password != null" >
         password,
       </if>
@@ -158,22 +170,40 @@
       <if test="role != null" >
         role,
       </if>
-      <if test="updatedate != null" >
-        updatedate,
+      <if test="token != null" >
+        token,
       </if>
-      <if test="username != null" >
-        username,
+      <if test="nickname != null" >
+        nickname,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+      <if test="xiaoquId != null" >
+        xiaoqu_id,
+      </if>
+      <if test="companyName != null" >
+        company_name,
+      </if>
+      <if test="deleted != null" >
+        deleted,
+      </if>
+      <if test="version != null" >
+        version,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="updateDate != null" >
+        update_date,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
-        #{id,jdbcType=BIGINT},
+        #{id,jdbcType=INTEGER},
       </if>
-      <if test="confirmpassword != null" >
-        #{confirmpassword,jdbcType=VARCHAR},
-      </if>
-      <if test="createdate != null" >
-        #{createdate,jdbcType=TIMESTAMP},
+      <if test="confirmPassword != null" >
+        #{confirmPassword,jdbcType=VARCHAR},
       </if>
       <if test="email != null" >
         #{email,jdbcType=VARCHAR},
@@ -187,6 +217,9 @@
       <if test="lastname != null" >
         #{lastname,jdbcType=VARCHAR},
       </if>
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
       <if test="password != null" >
         #{password,jdbcType=VARCHAR},
       </if>
@@ -196,11 +229,32 @@
       <if test="role != null" >
         #{role,jdbcType=VARCHAR},
       </if>
-      <if test="updatedate != null" >
-        #{updatedate,jdbcType=TIMESTAMP},
+      <if test="token != null" >
+        #{token,jdbcType=VARCHAR},
       </if>
-      <if test="username != null" >
-        #{username,jdbcType=VARCHAR},
+      <if test="nickname != null" >
+        #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="xiaoquId != null" >
+        #{xiaoquId,jdbcType=BIGINT},
+      </if>
+      <if test="companyName != null" >
+        #{companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="deleted != null" >
+        #{deleted,jdbcType=BIT},
+      </if>
+      <if test="version != null" >
+        #{version,jdbcType=BIGINT},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null" >
+        #{updateDate,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
@@ -214,13 +268,10 @@
     update userentity
     <set >
       <if test="record.id != null" >
-        id = #{record.id,jdbcType=BIGINT},
+        id = #{record.id,jdbcType=INTEGER},
       </if>
-      <if test="record.confirmpassword != null" >
-        confirmpassword = #{record.confirmpassword,jdbcType=VARCHAR},
-      </if>
-      <if test="record.createdate != null" >
-        createdate = #{record.createdate,jdbcType=TIMESTAMP},
+      <if test="record.confirmPassword != null" >
+        confirm_password = #{record.confirmPassword,jdbcType=VARCHAR},
       </if>
       <if test="record.email != null" >
         email = #{record.email,jdbcType=VARCHAR},
@@ -234,6 +285,9 @@
       <if test="record.lastname != null" >
         lastname = #{record.lastname,jdbcType=VARCHAR},
       </if>
+      <if test="record.username != null" >
+        username = #{record.username,jdbcType=VARCHAR},
+      </if>
       <if test="record.password != null" >
         password = #{record.password,jdbcType=VARCHAR},
       </if>
@@ -243,11 +297,32 @@
       <if test="record.role != null" >
         role = #{record.role,jdbcType=VARCHAR},
       </if>
-      <if test="record.updatedate != null" >
-        updatedate = #{record.updatedate,jdbcType=TIMESTAMP},
+      <if test="record.token != null" >
+        token = #{record.token,jdbcType=VARCHAR},
       </if>
-      <if test="record.username != null" >
-        username = #{record.username,jdbcType=VARCHAR},
+      <if test="record.nickname != null" >
+        nickname = #{record.nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.address != null" >
+        address = #{record.address,jdbcType=VARCHAR},
+      </if>
+      <if test="record.xiaoquId != null" >
+        xiaoqu_id = #{record.xiaoquId,jdbcType=BIGINT},
+      </if>
+      <if test="record.companyName != null" >
+        company_name = #{record.companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deleted != null" >
+        deleted = #{record.deleted,jdbcType=BIT},
+      </if>
+      <if test="record.version != null" >
+        version = #{record.version,jdbcType=BIGINT},
+      </if>
+      <if test="record.createDate != null" >
+        create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateDate != null" >
+        update_date = #{record.updateDate,jdbcType=TIMESTAMP},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -256,18 +331,25 @@
   </update>
   <update id="updateByExample" parameterType="map" >
     update userentity
-    set id = #{record.id,jdbcType=BIGINT},
-      confirmpassword = #{record.confirmpassword,jdbcType=VARCHAR},
-      createdate = #{record.createdate,jdbcType=TIMESTAMP},
+    set id = #{record.id,jdbcType=INTEGER},
+      confirm_password = #{record.confirmPassword,jdbcType=VARCHAR},
       email = #{record.email,jdbcType=VARCHAR},
       enable = #{record.enable,jdbcType=BIT},
       firstname = #{record.firstname,jdbcType=VARCHAR},
       lastname = #{record.lastname,jdbcType=VARCHAR},
+      username = #{record.username,jdbcType=VARCHAR},
       password = #{record.password,jdbcType=VARCHAR},
       phone = #{record.phone,jdbcType=VARCHAR},
       role = #{record.role,jdbcType=VARCHAR},
-      updatedate = #{record.updatedate,jdbcType=TIMESTAMP},
-      username = #{record.username,jdbcType=VARCHAR}
+      token = #{record.token,jdbcType=VARCHAR},
+      nickname = #{record.nickname,jdbcType=VARCHAR},
+      address = #{record.address,jdbcType=VARCHAR},
+      xiaoqu_id = #{record.xiaoquId,jdbcType=BIGINT},
+      company_name = #{record.companyName,jdbcType=VARCHAR},
+      deleted = #{record.deleted,jdbcType=BIT},
+      version = #{record.version,jdbcType=BIGINT},
+      create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      update_date = #{record.updateDate,jdbcType=TIMESTAMP}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -275,11 +357,8 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.jun.xiaoquren.model.UserEntity" >
     update userentity
     <set >
-      <if test="confirmpassword != null" >
-        confirmpassword = #{confirmpassword,jdbcType=VARCHAR},
-      </if>
-      <if test="createdate != null" >
-        createdate = #{createdate,jdbcType=TIMESTAMP},
+      <if test="confirmPassword != null" >
+        confirm_password = #{confirmPassword,jdbcType=VARCHAR},
       </if>
       <if test="email != null" >
         email = #{email,jdbcType=VARCHAR},
@@ -293,6 +372,9 @@
       <if test="lastname != null" >
         lastname = #{lastname,jdbcType=VARCHAR},
       </if>
+      <if test="username != null" >
+        username = #{username,jdbcType=VARCHAR},
+      </if>
       <if test="password != null" >
         password = #{password,jdbcType=VARCHAR},
       </if>
@@ -302,28 +384,56 @@
       <if test="role != null" >
         role = #{role,jdbcType=VARCHAR},
       </if>
-      <if test="updatedate != null" >
-        updatedate = #{updatedate,jdbcType=TIMESTAMP},
+      <if test="token != null" >
+        token = #{token,jdbcType=VARCHAR},
       </if>
-      <if test="username != null" >
-        username = #{username,jdbcType=VARCHAR},
+      <if test="nickname != null" >
+        nickname = #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="xiaoquId != null" >
+        xiaoqu_id = #{xiaoquId,jdbcType=BIGINT},
+      </if>
+      <if test="companyName != null" >
+        company_name = #{companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="deleted != null" >
+        deleted = #{deleted,jdbcType=BIT},
+      </if>
+      <if test="version != null" >
+        version = #{version,jdbcType=BIGINT},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null" >
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
       </if>
     </set>
-    where id = #{id,jdbcType=BIGINT}
+    where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.jun.xiaoquren.model.UserEntity" >
     update userentity
-    set confirmpassword = #{confirmpassword,jdbcType=VARCHAR},
-      createdate = #{createdate,jdbcType=TIMESTAMP},
+    set confirm_password = #{confirmPassword,jdbcType=VARCHAR},
       email = #{email,jdbcType=VARCHAR},
       enable = #{enable,jdbcType=BIT},
       firstname = #{firstname,jdbcType=VARCHAR},
       lastname = #{lastname,jdbcType=VARCHAR},
+      username = #{username,jdbcType=VARCHAR},
       password = #{password,jdbcType=VARCHAR},
       phone = #{phone,jdbcType=VARCHAR},
       role = #{role,jdbcType=VARCHAR},
-      updatedate = #{updatedate,jdbcType=TIMESTAMP},
-      username = #{username,jdbcType=VARCHAR}
-    where id = #{id,jdbcType=BIGINT}
+      token = #{token,jdbcType=VARCHAR},
+      nickname = #{nickname,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      xiaoqu_id = #{xiaoquId,jdbcType=BIGINT},
+      company_name = #{companyName,jdbcType=VARCHAR},
+      deleted = #{deleted,jdbcType=BIT},
+      version = #{version,jdbcType=BIGINT},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_date = #{updateDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>
