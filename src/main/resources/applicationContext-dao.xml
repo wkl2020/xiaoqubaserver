@@ -14,7 +14,7 @@
 
 	<aop:aspectj-autoproxy />
 	<context:annotation-config/>
-    <context:component-scan base-package="com.luckyryan.sample"/>
+    <context:component-scan base-package="com.jun.xiaoquren"/>
 
 	<bean id="propertyConfigurer"
 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"
@@ -39,11 +39,11 @@
 		<property name="configLocation" value="classpath:mybatis-config.xml" />
 		<!-- 所有配置的mapper文件 -->
 		<property name="mapperLocations"
-			value="classpath*:resources/com/luckyryan/sample/persistence/*.xml" />
+			value="classpath*:resources/com/jun/xiaoquren/persistence/*.xml" />
 	</bean>
 
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-		<property name="basePackage" value="com.luckyryan.sample.persistence" />
+		<property name="basePackage" value="com.jun.xiaoquren.persistence" />
 	</bean>
 
 	<bean id="transactionManager"
@@ -54,7 +54,7 @@
 
 	<aop:config>
 		<aop:pointcut id="myPointCut"
-			expression="execution(* com.luckyryan.sample.service..*.*(..))" />
+			expression="execution(* com.jun.xiaoquren.service..*.*(..))" />
 		<aop:advisor pointcut-ref="myPointCut" advice-ref="txAdvice" />
 	</aop:config>
 

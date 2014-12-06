@@ -8,7 +8,7 @@
         http://www.springframework.org/schema/context/spring-context-3.2.xsd">
 
     <!-- 
-    <bean id="agentJob" class="com.luckyryan.sample.job.AgentStatusJob"></bean>  
+    <bean id="agentJob" class="com.jun.xiaoquren.job.AgentStatusJob"></bean>  
     
     <bean id="jobtask"  
         class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">  
