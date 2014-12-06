@@ -1,5 +1,6 @@
 package com.monitor.server.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -24,6 +25,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.luckyryan.sample.model.UserEntity;
 import com.luckyryan.sample.service.UserService;
 import com.socket.server.util.StringUtil;
+import com.socket.server.util.UserRole;
 
 @Controller
 public class UserController {
@@ -61,10 +63,19 @@ public class UserController {
      }
 	 
 	 @RequestMapping(value = "/toRegisterUsrPage", method = RequestMethod.GET)
-     public ModelAndView registerUsr(HttpServletRequest request, Map<String, UserEntity> model) {
+     public ModelAndView registerUsr(HttpServletRequest request, Map<String, Object> model) {
 		 
 		 UserEntity user = new UserEntity();
 		 model.put("user", user);
+		 
+		 Map<String, String> userRoleList = new HashMap<String, String>();  
+		 userRoleList.put(UserRole.ADMIN, UserRole.ADMIN);  
+		 userRoleList.put(UserRole.PROPERTY, UserRole.PROPERTY);  
+		 userRoleList.put(UserRole.NORMAL, UserRole.NORMAL);  
+		 userRoleList.put(UserRole.ANONYM, UserRole.ANONYM); 
+		 
+		 model.put("userRoleList", userRoleList);
+		   
          return new ModelAndView("register");
      }
 	 

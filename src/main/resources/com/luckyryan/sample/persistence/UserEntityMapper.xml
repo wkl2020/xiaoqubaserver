@@ -114,12 +114,12 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.luckyryan.sample.model.UserEntity">
-    insert into userentity (id, confirmpassword, createdate, 
+    insert into userentity (confirmpassword, createdate, 
       email, enable, firstname, 
       lastname, password, phone, 
       role, updatedate, username
       )
-    values (#{id,jdbcType=BIGINT}, #{confirmpassword,jdbcType=VARCHAR}, #{createdate,jdbcType=TIMESTAMP}, 
+    values (#{confirmpassword,jdbcType=VARCHAR}, #{createdate,jdbcType=TIMESTAMP}, 
       #{email,jdbcType=VARCHAR}, #{enable,jdbcType=BIT}, #{firstname,jdbcType=VARCHAR}, 
       #{lastname,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
       #{role,jdbcType=VARCHAR}, #{updatedate,jdbcType=TIMESTAMP}, #{username,jdbcType=VARCHAR}

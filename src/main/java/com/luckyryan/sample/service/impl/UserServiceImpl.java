@@ -11,6 +11,8 @@ import com.luckyryan.sample.model.UserEntity;
 import com.luckyryan.sample.model.UserEntityExample;
 import com.luckyryan.sample.persistence.UserEntityMapper;
 import com.luckyryan.sample.service.UserService;
+import com.socket.server.util.StringUtil;
+import com.socket.server.util.UserRole;
 
 
 
@@ -44,6 +46,10 @@ public class UserServiceImpl implements UserService {
 		
 		user.setCreatedate(new Date());
 		user.setUpdatedate(new Date());
+		user.setEnable(true);
+		if (StringUtil.isEmpty(user.getRole())) {
+			user.setRole(UserRole.ANONYM);
+		}
 		return userEntityMapper.insert(user);
 	}
 	
@@ -71,7 +77,7 @@ public class UserServiceImpl implements UserService {
 			
 			if (user != null) {
 				user.setEnable(isEnable);
-				userEntityMapper.insert(user);
+				userEntityMapper.updateByPrimaryKey(user);
 			} else {
 				result = "Failed";
 			}			
@@ -94,7 +100,7 @@ public class UserServiceImpl implements UserService {
 			if (user != null) {
 				user.setPassword(newPwd);
 				user.setConfirmpassword(newPwd);
-				userEntityMapper.insert(user);
+				userEntityMapper.updateByPrimaryKey(user);
 			} else {
 				result = "Failed";
 			}			

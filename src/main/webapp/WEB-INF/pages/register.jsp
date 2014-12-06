@@ -37,24 +37,52 @@
 	<form:form method="Post" action="${pageContext.request.contextPath}/main/createUser" commandName="user" modelAttribute="user">
 		<table align="center" style="padding: 100px">
 			<tr>
-				<td>用户名: </td>
+				<td>用户名* </td>
 			</tr>
 		<tr>
 			<td><form:input path="username" /> <FONT color="red"><form:errors path="username" /></FONT></td>
 		</tr>
 		
 		<tr>
-			<td>密码: </td>
+			<td>密码* </td>
 		</tr>
 		<tr>
 			<td><form:password path="password" /> <FONT color="red"><form:errors path="password" /></FONT></td>
 		</tr>
 		
 		<tr>
-			<td>确认密码: </td>
+			<td>确认密码* </td>
 		</tr>
 		<tr>
 			<td><form:password path="confirmpassword" /> <FONT color="red"><form:errors path="confirmpassword" /></FONT></td>
+		</tr>
+		
+		<tr>
+			<td>姓: </td>
+		</tr>
+		<tr>
+			<td><form:input path="firstname" /> <FONT color="red"><form:errors path="firstname" /></FONT></td>
+		</tr>
+		
+		<tr>
+			<td>名: </td>
+		</tr>
+		<tr>
+			<td><form:input path="lastname" /> <FONT color="red"><form:errors path="lastname" /></FONT></td>
+		</tr>
+		
+		<tr>
+			<td>电话* </td>
+		</tr>
+		<tr>
+			<td><form:input path="phone" /> <FONT color="red"><form:errors path="phone" /></FONT></td>
+		</tr>
+		
+		<tr>
+			<td>用户角色* </td>
+		</tr>
+		<tr>
+			<td><form:select path="role" items="${userRoleList}" /><FONT color="red"><form:errors path="role" /></FONT></td>
 		</tr>
 		
 		<tr>
