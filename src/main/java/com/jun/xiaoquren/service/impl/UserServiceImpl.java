@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import com.jun.xiaoquren.exception.InvalidDataException;
 import com.jun.xiaoquren.model.UserEntity;
-import com.jun.xiaoquren.model.UserEntityExample;
 import com.jun.xiaoquren.persistence.UserEntityMapper;
 import com.jun.xiaoquren.service.UserService;
 import com.jun.xiaoquren.util.StringUtil;
@@ -62,8 +61,7 @@ public class UserServiceImpl implements UserService {
 	
 	@Override
 	public List<UserEntity> findAll() {
-		UserEntityExample userExample = new UserEntityExample();
-		return this.userEntityMapper.selectByExample(userExample);
+		return this.userEntityMapper.selectAll();
 	}
 
 	@Override

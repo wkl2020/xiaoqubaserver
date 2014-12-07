@@ -1,10 +1,11 @@
-package com.jun.xiaoquren.persistence;
+package com.jun.xiaoquren.service;
 
 import java.util.List;
 
 import com.jun.xiaoquren.model.Xiaoqu;
 
-public interface XiaoquMapper {
+public interface XiaoquService {
+	
     int deleteByPrimaryKey(Integer id);
 
     int insert(Xiaoqu record);
@@ -18,4 +19,5 @@ public interface XiaoquMapper {
     int updateByPrimaryKeySelective(Xiaoqu record);
 
     int updateByPrimaryKey(Xiaoqu record);
+
 }

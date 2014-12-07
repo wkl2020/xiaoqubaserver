@@ -1,10 +1,11 @@
-package com.jun.xiaoquren.persistence;
+package com.jun.xiaoquren.service;
 
 import java.util.List;
 
 import com.jun.xiaoquren.model.DocumentComment;
 
-public interface DocumentCommentMapper {
+public interface DocumentCommentService {
+
     int deleteByPrimaryKey(Integer id);
 
     int insert(DocumentComment record);

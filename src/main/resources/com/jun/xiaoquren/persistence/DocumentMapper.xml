@@ -19,98 +19,31 @@
     <result column="publish_date" property="publishDate" jdbcType="TIMESTAMP" />
     <result column="expire_date" property="expireDate" jdbcType="TIMESTAMP" />
   </resultMap>
-  <sql id="Example_Where_Clause" >
-    <where >
-      <foreach collection="oredCriteria" item="criteria" separator="or" >
-        <if test="criteria.valid" >
-          <trim prefix="(" suffix=")" prefixOverrides="and" >
-            <foreach collection="criteria.criteria" item="criterion" >
-              <choose >
-                <when test="criterion.noValue" >
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue" >
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue" >
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue" >
-                  and ${criterion.condition}
-                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Update_By_Example_Where_Clause" >
-    <where >
-      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
-        <if test="criteria.valid" >
-          <trim prefix="(" suffix=")" prefixOverrides="and" >
-            <foreach collection="criteria.criteria" item="criterion" >
-              <choose >
-                <when test="criterion.noValue" >
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue" >
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue" >
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue" >
-                  and ${criterion.condition}
-                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
   <sql id="Base_Column_List" >
     id, xiaoqu_id, document_type, owner, manage_company, title, content, replay_count, 
     creator_id, updator_id, deleted, version, create_date, update_date, publish_date, 
     expire_date
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jun.xiaoquren.model.DocumentExample" >
-    select
-    <if test="distinct" >
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    from document
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null" >
-      order by ${orderByClause}
-    </if>
-  </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
     from document
     where id = #{id,jdbcType=INTEGER}
   </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select 
+    <include refid="Base_Column_List" />
+    from document
+  </select>
+  <select id="selectByXiaoquId" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from document
+    where xiaoqu_id = #{xiaoquId,jdbcType=INTEGER}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from document
     where id = #{id,jdbcType=INTEGER}
-  </delete>
-  <delete id="deleteByExample" parameterType="com.jun.xiaoquren.model.DocumentExample" >
-    delete from document
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
   </delete>
   <insert id="insert" parameterType="com.jun.xiaoquren.model.Document" >
     insert into document (xiaoqu_id, document_type, 
@@ -229,90 +162,6 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.jun.xiaoquren.model.DocumentExample" resultType="java.lang.Integer" >
-    select count(*) from document
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-  </select>
-  <update id="updateByExampleSelective" parameterType="map" >
-    update document
-    <set >
-      <if test="record.id != null" >
-        id = #{record.id,jdbcType=INTEGER},
-      </if>
-      <if test="record.xiaoquId != null" >
-        xiaoqu_id = #{record.xiaoquId,jdbcType=BIGINT},
-      </if>
-      <if test="record.documentType != null" >
-        document_type = #{record.documentType,jdbcType=VARCHAR},
-      </if>
-      <if test="record.owner != null" >
-        owner = #{record.owner,jdbcType=VARCHAR},
-      </if>
-      <if test="record.manageCompany != null" >
-        manage_company = #{record.manageCompany,jdbcType=VARCHAR},
-      </if>
-      <if test="record.title != null" >
-        title = #{record.title,jdbcType=VARCHAR},
-      </if>
-      <if test="record.content != null" >
-        content = #{record.content,jdbcType=VARCHAR},
-      </if>
-      <if test="record.replayCount != null" >
-        replay_count = #{record.replayCount,jdbcType=BIGINT},
-      </if>
-      <if test="record.creatorId != null" >
-        creator_id = #{record.creatorId,jdbcType=BIGINT},
-      </if>
-      <if test="record.updatorId != null" >
-        updator_id = #{record.updatorId,jdbcType=BIGINT},
-      </if>
-      <if test="record.deleted != null" >
-        deleted = #{record.deleted,jdbcType=BIT},
-      </if>
-      <if test="record.version != null" >
-        version = #{record.version,jdbcType=BIGINT},
-      </if>
-      <if test="record.createDate != null" >
-        create_date = #{record.createDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="record.updateDate != null" >
-        update_date = #{record.updateDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="record.publishDate != null" >
-        publish_date = #{record.publishDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="record.expireDate != null" >
-        expire_date = #{record.expireDate,jdbcType=TIMESTAMP},
-      </if>
-    </set>
-    <if test="_parameter != null" >
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExample" parameterType="map" >
-    update document
-    set id = #{record.id,jdbcType=INTEGER},
-      xiaoqu_id = #{record.xiaoquId,jdbcType=BIGINT},
-      document_type = #{record.documentType,jdbcType=VARCHAR},
-      owner = #{record.owner,jdbcType=VARCHAR},
-      manage_company = #{record.manageCompany,jdbcType=VARCHAR},
-      title = #{record.title,jdbcType=VARCHAR},
-      content = #{record.content,jdbcType=VARCHAR},
-      replay_count = #{record.replayCount,jdbcType=BIGINT},
-      creator_id = #{record.creatorId,jdbcType=BIGINT},
-      updator_id = #{record.updatorId,jdbcType=BIGINT},
-      deleted = #{record.deleted,jdbcType=BIT},
-      version = #{record.version,jdbcType=BIGINT},
-      create_date = #{record.createDate,jdbcType=TIMESTAMP},
-      update_date = #{record.updateDate,jdbcType=TIMESTAMP},
-      publish_date = #{record.publishDate,jdbcType=TIMESTAMP},
-      expire_date = #{record.expireDate,jdbcType=TIMESTAMP}
-    <if test="_parameter != null" >
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.jun.xiaoquren.model.Document" >
     update document
     <set >

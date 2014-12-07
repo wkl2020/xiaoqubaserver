@@ -1,10 +1,11 @@
-package com.jun.xiaoquren.persistence;
+package com.jun.xiaoquren.service;
 
 import java.util.List;
 
 import com.jun.xiaoquren.model.DocumentEvaluation;
 
-public interface DocumentEvaluationMapper {
+public interface DocumentEvaluationService {
+
     int deleteByPrimaryKey(Integer id);
 
     int insert(DocumentEvaluation record);
@@ -20,4 +21,5 @@ public interface DocumentEvaluationMapper {
     int updateByPrimaryKeySelective(DocumentEvaluation record);
 
     int updateByPrimaryKey(DocumentEvaluation record);
+
 }

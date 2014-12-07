@@ -22,88 +22,21 @@
     <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
     <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
   </resultMap>
-  <sql id="Example_Where_Clause" >
-    <where >
-      <foreach collection="oredCriteria" item="criteria" separator="or" >
-        <if test="criteria.valid" >
-          <trim prefix="(" suffix=")" prefixOverrides="and" >
-            <foreach collection="criteria.criteria" item="criterion" >
-              <choose >
-                <when test="criterion.noValue" >
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue" >
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue" >
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue" >
-                  and ${criterion.condition}
-                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Update_By_Example_Where_Clause" >
-    <where >
-      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
-        <if test="criteria.valid" >
-          <trim prefix="(" suffix=")" prefixOverrides="and" >
-            <foreach collection="criteria.criteria" item="criterion" >
-              <choose >
-                <when test="criterion.noValue" >
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue" >
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue" >
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue" >
-                  and ${criterion.condition}
-                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
   <sql id="Base_Column_List" >
     id, confirm_password, email, enable, firstname, lastname, username, password, phone, 
     role, token, nickname, address, xiaoqu_id, company_name, deleted, version, create_date, 
     update_date
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jun.xiaoquren.model.UserEntityExample" >
-    select
-    <if test="distinct" >
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    from userentity
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null" >
-      order by ${orderByClause}
-    </if>
-  </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
     from userentity
     where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select 
+    <include refid="Base_Column_List" />
+    from userentity
   </select>
   <select id="selectByUsername" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
@@ -114,12 +47,6 @@
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from userentity
     where id = #{id,jdbcType=INTEGER}
-  </delete>
-  <delete id="deleteByExample" parameterType="com.jun.xiaoquren.model.UserEntityExample" >
-    delete from userentity
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
   </delete>
   <insert id="insert" parameterType="com.jun.xiaoquren.model.UserEntity" >
     insert into userentity (confirm_password, email, 
@@ -258,102 +185,6 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.jun.xiaoquren.model.UserEntityExample" resultType="java.lang.Integer" >
-    select count(*) from userentity
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-  </select>
-  <update id="updateByExampleSelective" parameterType="map" >
-    update userentity
-    <set >
-      <if test="record.id != null" >
-        id = #{record.id,jdbcType=INTEGER},
-      </if>
-      <if test="record.confirmPassword != null" >
-        confirm_password = #{record.confirmPassword,jdbcType=VARCHAR},
-      </if>
-      <if test="record.email != null" >
-        email = #{record.email,jdbcType=VARCHAR},
-      </if>
-      <if test="record.enable != null" >
-        enable = #{record.enable,jdbcType=BIT},
-      </if>
-      <if test="record.firstname != null" >
-        firstname = #{record.firstname,jdbcType=VARCHAR},
-      </if>
-      <if test="record.lastname != null" >
-        lastname = #{record.lastname,jdbcType=VARCHAR},
-      </if>
-      <if test="record.username != null" >
-        username = #{record.username,jdbcType=VARCHAR},
-      </if>
-      <if test="record.password != null" >
-        password = #{record.password,jdbcType=VARCHAR},
-      </if>
-      <if test="record.phone != null" >
-        phone = #{record.phone,jdbcType=VARCHAR},
-      </if>
-      <if test="record.role != null" >
-        role = #{record.role,jdbcType=VARCHAR},
-      </if>
-      <if test="record.token != null" >
-        token = #{record.token,jdbcType=VARCHAR},
-      </if>
-      <if test="record.nickname != null" >
-        nickname = #{record.nickname,jdbcType=VARCHAR},
-      </if>
-      <if test="record.address != null" >
-        address = #{record.address,jdbcType=VARCHAR},
-      </if>
-      <if test="record.xiaoquId != null" >
-        xiaoqu_id = #{record.xiaoquId,jdbcType=BIGINT},
-      </if>
-      <if test="record.companyName != null" >
-        company_name = #{record.companyName,jdbcType=VARCHAR},
-      </if>
-      <if test="record.deleted != null" >
-        deleted = #{record.deleted,jdbcType=BIT},
-      </if>
-      <if test="record.version != null" >
-        version = #{record.version,jdbcType=BIGINT},
-      </if>
-      <if test="record.createDate != null" >
-        create_date = #{record.createDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="record.updateDate != null" >
-        update_date = #{record.updateDate,jdbcType=TIMESTAMP},
-      </if>
-    </set>
-    <if test="_parameter != null" >
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExample" parameterType="map" >
-    update userentity
-    set id = #{record.id,jdbcType=INTEGER},
-      confirm_password = #{record.confirmPassword,jdbcType=VARCHAR},
-      email = #{record.email,jdbcType=VARCHAR},
-      enable = #{record.enable,jdbcType=BIT},
-      firstname = #{record.firstname,jdbcType=VARCHAR},
-      lastname = #{record.lastname,jdbcType=VARCHAR},
-      username = #{record.username,jdbcType=VARCHAR},
-      password = #{record.password,jdbcType=VARCHAR},
-      phone = #{record.phone,jdbcType=VARCHAR},
-      role = #{record.role,jdbcType=VARCHAR},
-      token = #{record.token,jdbcType=VARCHAR},
-      nickname = #{record.nickname,jdbcType=VARCHAR},
-      address = #{record.address,jdbcType=VARCHAR},
-      xiaoqu_id = #{record.xiaoquId,jdbcType=BIGINT},
-      company_name = #{record.companyName,jdbcType=VARCHAR},
-      deleted = #{record.deleted,jdbcType=BIT},
-      version = #{record.version,jdbcType=BIGINT},
-      create_date = #{record.createDate,jdbcType=TIMESTAMP},
-      update_date = #{record.updateDate,jdbcType=TIMESTAMP}
-    <if test="_parameter != null" >
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.jun.xiaoquren.model.UserEntity" >
     update userentity
     <set >

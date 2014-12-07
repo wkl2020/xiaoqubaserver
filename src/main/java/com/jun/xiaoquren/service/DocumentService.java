@@ -1,10 +1,11 @@
-package com.jun.xiaoquren.persistence;
+package com.jun.xiaoquren.service;
 
 import java.util.List;
 
 import com.jun.xiaoquren.model.Document;
 
-public interface DocumentMapper {
+public interface DocumentService {
+	
     int deleteByPrimaryKey(Integer id);
 
     int insert(Document record);
@@ -20,4 +21,5 @@ public interface DocumentMapper {
     int updateByPrimaryKeySelective(Document record);
 
     int updateByPrimaryKey(Document record);
+
 }
