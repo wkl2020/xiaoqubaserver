@@ -4,15 +4,19 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import net.sf.json.JSONObject;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.jun.xiaoquren.model.Xiaoqu;
 import com.jun.xiaoquren.service.XiaoquService;
@@ -25,6 +29,21 @@ public class XiaoquController {
 		
 	@Autowired
 	XiaoquService xiaoquService;
+	
+	@RequestMapping(value = "/toXiaoquAdd", method = RequestMethod.GET)
+    public ModelAndView toXiaoquAdd(HttpServletRequest request) {
+        return new ModelAndView("xiaoqu_add");
+    }
+
+	@RequestMapping(value = "/toXiaoquList", method = RequestMethod.GET)
+    public ModelAndView toXiaoquList(HttpServletRequest request) {
+        return new ModelAndView("xiaoqu_list");
+    }
+
+	@RequestMapping(value = "/toXiaoquUpdate", method = RequestMethod.GET)
+    public ModelAndView toXiaoquUpdate(HttpServletRequest request) {
+        return new ModelAndView("xiaoqu_update");
+    }
 
 	
 	@RequestMapping(value = "/xiaoqu/index", method = RequestMethod.GET)
@@ -59,7 +78,7 @@ public class XiaoquController {
     }  
 		
 	@RequestMapping(value = "/xiaoqu", method = RequestMethod.POST)  
-    public @ResponseBody Object addXiaoqu(Xiaoqu xiaoqu) {  
+    public @ResponseBody Object addXiaoqu(@RequestBody Xiaoqu xiaoqu) {  
 		
         logger.info("Add xiaoqu with name " + xiaoqu.getName());  
         
@@ -94,7 +113,7 @@ public class XiaoquController {
     }	
 		
 	@RequestMapping(value = "/xiaoqu", method = RequestMethod.PUT)  
-    public @ResponseBody Object updateXiaoqu(Xiaoqu xiaoqu) {  
+    public @ResponseBody Object updateXiaoqu(@RequestBody Xiaoqu xiaoqu) {  
 		
         logger.info("Update xiaoqu by id " + xiaoqu.getId());  
         String result = "failed";
