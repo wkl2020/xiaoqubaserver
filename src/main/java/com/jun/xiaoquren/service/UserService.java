@@ -7,8 +7,8 @@ import com.jun.xiaoquren.model.UserEntity;
 
 public interface UserService {
 	
-	 public String userLogin(UserEntity user);  
-	 public int saveUser(UserEntity user);
+	 public String userLogin(UserEntity user);
+	 public int saveUser(UserEntity user) throws InvalidDataException;
 	 
 	 public List<UserEntity> findAll() throws InvalidDataException;
 	 public int deleteUser(Integer userId) throws InvalidDataException;

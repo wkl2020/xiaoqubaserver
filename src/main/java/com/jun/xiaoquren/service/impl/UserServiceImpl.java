@@ -40,18 +40,26 @@ public class UserServiceImpl implements UserService {
         }  
 	}
 	
-	public int saveUser(UserEntity user)
-			throws InvalidDataException {
+	public int saveUser(UserEntity user) throws InvalidDataException {
+		int result = -1;
 		
-		user.setCreateDate(new Date());
-		user.setUpdateDate(new Date());
-		user.setEnable(true);
-		user.setDeleted(false);
-		user.setVersion(0l);
-		if (StringUtil.isEmpty(user.getRole())) {
-			user.setRole(UserRole.ANONYM);
-		}
-		return userEntityMapper.insert(user);
+		if (user.getId() == null) {			
+			user.setCreateDate(new Date());
+			user.setUpdateDate(new Date());
+			user.setEnable(true);
+			user.setDeleted(false);
+			user.setVersion(0l);
+			if (StringUtil.isEmpty(user.getRole())) {
+				user.setRole(UserRole.ANONYM);
+			}
+			result = userEntityMapper.insert(user);
+			
+		} else {			
+			user.setUpdateDate(new Date());
+			result = userEntityMapper.updateByPrimaryKey(user);			
+		}		
+		
+		return result;
 	}
 	
 	public UserEntity findUserByUsername(String username) throws InvalidDataException {

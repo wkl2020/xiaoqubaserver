@@ -9,9 +9,41 @@
 
     <!-- Scan for spring annotated components -->
     <context:component-scan base-package="com.jun.xiaoquren"/>
+    
+    <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">  
+        <property name="messageConverters">  
+            <list>  
+                <bean class="org.springframework.http.converter.StringHttpMessageConverter">  
+                    <property name="supportedMediaTypes">  
+                        <list>  
+                            <value>text/plain;charset=UTF-8</value>  
+                        </list>  
+                    </property>  
+                </bean>  
+                <bean class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter" />  
+            </list>  
+        </property>  
+    </bean>  
 
     <!-- Process annotations on registered beans like @Autowired... -->
     <context:annotation-config/>
+    
+    <!-- 
+    <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">  
+        <property name="messageConverters">  
+            <list>  
+                <bean class="org.springframework.http.converter.StringHttpMessageConverter">  
+                    <property name="supportedMediaTypes">  
+                        <list>  
+                            <value>text/plain;charset=UTF-8</value>  
+                        </list>  
+                    </property>  
+                </bean>  
+                <bean class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter" />  
+            </list>  
+        </property>  
+    </bean>  
+     -->
     
     <!-- 
     <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">

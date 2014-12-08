@@ -2,22 +2,23 @@ package com.jun.xiaoquren.service;
 
 import java.util.List;
 
+import com.jun.xiaoquren.exception.InvalidDataException;
 import com.jun.xiaoquren.model.Xiaoqu;
 
 public interface XiaoquService {
 	
-    int deleteByPrimaryKey(Integer id);
+    int deleteByPrimaryKey(Integer id) throws InvalidDataException;
 
-    int insert(Xiaoqu record);
+    int saveXiaoqu(Xiaoqu xiaoqu) throws InvalidDataException;
 
-    int insertSelective(Xiaoqu record);
+    int insertSelective(Xiaoqu xiaoqu) throws InvalidDataException;
 
-    Xiaoqu selectByPrimaryKey(Integer id);
+    Xiaoqu selectByPrimaryKey(Integer id) throws InvalidDataException;
     
-    List<Xiaoqu> selectAll();
+    List<Xiaoqu> selectAll() throws InvalidDataException;
 
-    int updateByPrimaryKeySelective(Xiaoqu record);
+    int updateByPrimaryKeySelective(Xiaoqu xiaoqu) throws InvalidDataException;
 
-    int updateByPrimaryKey(Xiaoqu record);
+    int updateByPrimaryKey(Xiaoqu xiaoqu) throws InvalidDataException;
 
 }

@@ -2,24 +2,25 @@ package com.jun.xiaoquren.service;
 
 import java.util.List;
 
+import com.jun.xiaoquren.exception.InvalidDataException;
 import com.jun.xiaoquren.model.Document;
 
 public interface DocumentService {
 	
-    int deleteByPrimaryKey(Integer id);
+    int deleteByPrimaryKey(Integer id) throws InvalidDataException;
 
-    int insert(Document record);
-
-    int insertSelective(Document record);
-
-    Document selectByPrimaryKey(Integer id);
+    int saveDocument(Document document) throws InvalidDataException;
     
-    List<Document> selectAll();
+    int insertSelective(Document document) throws InvalidDataException;
+
+    Document selectByPrimaryKey(Integer id) throws InvalidDataException;
     
-    List<Document> selectByXiaoquId(Integer xiaoquId);
+    List<Document> selectAll() throws InvalidDataException;
+    
+    List<Document> selectByXiaoquId(Integer xiaoquId) throws InvalidDataException;
 
-    int updateByPrimaryKeySelective(Document record);
+    int updateByPrimaryKeySelective(Document document) throws InvalidDataException;
 
-    int updateByPrimaryKey(Document record);
+    int updateByPrimaryKey(Document document) throws InvalidDataException;
 
 }
