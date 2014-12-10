@@ -7,6 +7,8 @@
     <title>Xiaoqu Add Page</title>
 	<link href='<c:url value="/main/css/jquery.ui.theme.css"/>' type="text/css" rel="stylesheet"></link>
 	<link href='<c:url value="/main/css/main.css"/>' type="text/css" rel="stylesheet"></link>
+	<link href='<c:url value="/main/dist/css/flat-ui.css"/>' type="text/css" rel="stylesheet"></link>
+	<link href='<c:url value="/main/dist/css/vendor/bootstrap.min.css"/>' type="text/css" rel="stylesheet"></link>
 	
 	<script type="text/javascript" src='<c:url value="/main/js/jquery-1.11.0.min.js"></c:url>'></script>
     
@@ -57,67 +59,62 @@
 
 <%@include file="header.jsp" %>
 
-<div>
-	<form id="xiaoqu_add_form">
-	  <table align="center" style="padding: 100px">
-		<tr>
-			<td>小区名称* </td>
-		</tr>
-		<tr>
-			<td><input id="name" name="name" type="text" /> <label id="nameMsg" style="color:red">&nbsp;</label></td>
-		</tr>
-		
-		<tr>
-			<td>描述</td>
-		</tr>
-		<tr>
-			<td><input id="description" name="description" type="text" /> <label id="descriptionMsg" style="color:red">&nbsp;</label></td>
-		</tr>
-		
-		<tr>
-			<td>地址* </td>
-		</tr>
-		<tr>
-			<td><input id="address" name="address" type="text" /> <label id="addressMsg" style="color:red">&nbsp;</label></td>
-		</tr>
-		
-		<tr>
-			<td>创建者* </td>
-		</tr>
-		<tr>
-			<td><input id="owner" name="owner" type="text" /> <label id="ownerMsg" style="color:red">&nbsp;</label></td>
-		</tr>
-		
-		<tr>
-			<td>x </td>
-		</tr>
-		<tr>
-			<td><input id="x" name="x" type="text" /> <label id="xMsg" style="color:red">&nbsp;</label></td>
-		</tr>
-		
-		<tr>
-			<td>y </td>
-		</tr>
-		<tr>
-			<td><input id="y" name="y" type="text" /> <label id="yMsg" style="color:red">&nbsp;</label></td>
-		</tr>
-		
-		<tr>
-			<td>城市</td>
-		</tr>
-		<tr>
-			<td><input id="city" name="city" type="text" /> <label id="cityMsg" style="color:red">&nbsp;</label></td>
-		</tr>
-		
-		
-		
-		<tr>
-		<td><input type="submit" value="提交"/></td>
-		</tr>
-		</table>
-	</form>
-
-</div>  
+<div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h3>增加公告评论</h3>
+        <form id="xiaoqu_add_form" role="form">
+        	
+            <div class="form-group">
+              <label for="name">小区名称</label>              
+              <input id="name" name="name" class="form-control" placeholder="" type="text" />
+              <label id="nameMsg" style="display:none;color:red;">&nbsp;</label>
+            </div>
+            
+            <div class="form-group">
+              <label for="description">描述</label>              
+              <input id="description" name="description" class="form-control" placeholder="" type="text" />
+              <label id="descriptionMsg" style="display:none;color:red;">&nbsp;</label>
+            </div>
+            
+            <div class="form-group">
+              <label for="address">地址</label>              
+              <input id="address" name="address" class="form-control" placeholder="" type="text" />
+              <label id="addressMsg" style="display:none;color:red;">&nbsp;</label>
+            </div>
+            
+            <div class="form-group">
+              <label for="owner">创建者</label>              
+              <textarea id="owner" name="owner" class="form-control" rows="5"></textarea>
+              <label id="ownerMsg" style="display:none;color:red;">&nbsp;</label>
+            </div>
+            
+            <div class="form-group">
+              <label for="x">x</label>              
+             <input id="x" name="x" class="form-control" placeholder="" type="text" />
+              <label id="xMsg" style="display:none;color:red;">&nbsp;</label>
+            </div>
+            
+            <div class="form-group">
+              <label for="y">y</label>              
+              <input id="y" name="y" class="form-control" placeholder="" type="text" />
+              <label id="yMsg" style="display:none;color:red;">&nbsp;</label>
+            </div>
+            
+            <div class="form-group">
+              <label for="city">城市</label>              
+              <input id="city" name="city" class="form-control" placeholder="" type="text" />
+              <label id="cityMsg" style="display:none;color:red;">&nbsp;</label>
+            </div>
+            
+            <div class="form-group">
+              <input type="submit" class="btn btn-default" value="提交"/>
+            </div>
+            
+        </form>
+      </div>
+    </div>
+</div>
 	
 </body>
 </html>

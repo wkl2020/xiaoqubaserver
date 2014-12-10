@@ -7,6 +7,8 @@
     <title>Register Page</title>
 	<link href='<c:url value="/main/css/jquery.ui.theme.css"/>' type="text/css" rel="stylesheet"></link>
 	<link href='<c:url value="/main/css/main.css"/>' type="text/css" rel="stylesheet"></link>
+	<link href='<c:url value="/main/dist/css/flat-ui.css"/>' type="text/css" rel="stylesheet"></link>
+	<link href='<c:url value="/main/dist/css/vendor/bootstrap.min.css"/>' type="text/css" rel="stylesheet"></link>
 	
 	<script type="text/javascript" src='<c:url value="/main/js/jquery-1.11.0.min.js"></c:url>'></script>
     
@@ -116,7 +118,7 @@
 		</tr>
 		
 		<tr>
-		<td><input type="submit" value="提交" /></td>
+		<td><input type="submit" class="btn btn-default" value="提交" /></td>
 		</tr>
 		</table>
 	</form:form>

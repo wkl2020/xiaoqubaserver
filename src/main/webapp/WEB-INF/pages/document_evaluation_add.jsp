@@ -7,6 +7,8 @@
     <title>Document Evaluation Add Page</title>
 	<link href='<c:url value="/main/css/jquery.ui.theme.css"/>' type="text/css" rel="stylesheet"></link>
 	<link href='<c:url value="/main/css/main.css"/>' type="text/css" rel="stylesheet"></link>
+	<link href='<c:url value="/main/dist/css/flat-ui.css"/>' type="text/css" rel="stylesheet"></link>
+	<link href='<c:url value="/main/dist/css/vendor/bootstrap.min.css"/>' type="text/css" rel="stylesheet"></link>
 	
 	<script type="text/javascript" src='<c:url value="/main/js/jquery-1.11.0.min.js"></c:url>'></script>
     
@@ -54,46 +56,44 @@
 
 <%@include file="header.jsp" %>
 
-<div>
-	<form id="documentEvaluation_add_form">
-	  <table align="center" style="padding: 100px">
-		<tr>
-			<td>公告Id* </td>
-		</tr>
-		<tr>
-			<td><input id="documentId" name="documentId" type="text" /> <label id="documentIdMsg" style="color:red">&nbsp;</label></td>
-		</tr>
-		
-		<tr>
-			<td>公告类型</td>
-		</tr>
-		<tr>
-			<td><input id="documentType" name="documentType" type="text" /> <label id="documentTypeMsg" style="color:red">&nbsp;</label></td>
-		</tr>
-		
-		<tr>
-			<td>好评/差评* </td>
-		</tr>
-		<tr>
-			<td><input id="evaluationType" name="evaluationType" type="text" /> <label id="evaluationTypeMsg" style="color:red">&nbsp;</label></td>
-		</tr>
-		
-		<tr>
-			<td>评论者昵称* </td>
-		</tr>
-		<tr>
-			<td><input id="nickname" name="nickname" type="text" /> <label id="nicknameMsg" style="color:red">&nbsp;</label></td>
-		</tr>
-		
-		
-		
-		<tr>
-		<td><input type="submit" value="提交"/></td>
-		</tr>
-		</table>
-	</form>
-
-</div>  
+<div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h3>增加公告评论</h3>
+        <form id="documentEvaluation_add_form" role="form">
+        	
+            <div class="form-group">
+              <label for="documentId">公告Id</label>              
+              <input id="documentId" name="documentId" class="form-control" placeholder="" type="text" />
+              <label id="documentIdMsg" style="display:none;color:red;">&nbsp;</label>
+            </div>
+            
+            <div class="form-group">
+              <label for="documentType">公告类型</label>              
+              <input id="documentType" name="documentType" class="form-control" placeholder="" type="text" />
+              <label id="documentTypeMsg" style="display:none;color:red;">&nbsp;</label>
+            </div>
+            
+            <div class="form-group">
+              <label for="evaluationType">好评/差评</label>              
+              <input id="evaluationType" name="evaluationType" class="form-control" placeholder="" type="text" />
+              <label id="evaluationTypeMsg" style="display:none;color:red;">&nbsp;</label>
+            </div>
+            
+            <div class="form-group">
+              <label for="nickname">评论者昵称</label>              
+              <input id="nickname" name="nickname" class="form-control" placeholder="" type="text" />
+              <label id="nicknameMsg" style="display:none;color:red;">&nbsp;</label>
+            </div>
+            
+            <div class="form-group">
+              <input type="submit" class="btn btn-default" value="提交"/>
+            </div>
+            
+        </form>
+      </div>
+    </div>
+</div>
 	
 </body>
 </html>

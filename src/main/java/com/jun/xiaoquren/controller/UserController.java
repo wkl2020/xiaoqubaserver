@@ -36,11 +36,6 @@ public class UserController {
 	@Autowired
 	private UserValidation userValidation; // 用户自定义验证
 	 
-	@RequestMapping(value = "/index", method = RequestMethod.GET)
-    public ModelAndView indexPage() {
-        return new ModelAndView("index");
-    }
-	 
 	 @RequestMapping(value = "/login.html", method = RequestMethod.GET)
      public ModelAndView loginPage() {
          return new ModelAndView("login");

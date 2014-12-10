@@ -29,19 +29,24 @@ public class IndexController {
 	@Autowired
 	UserService userService;
 	
-	private final String PAGE_INDEX = "index";
+//	private final String PAGE_INDEX = "index";
+	 
+	@RequestMapping(value = "/index", method = RequestMethod.GET)
+   public ModelAndView indexPage() {
+       return new ModelAndView("index");
+   }
 
-    @RequestMapping(value = "/index", method = RequestMethod.GET)
-    public ModelAndView viewStatus(HttpSession session, HttpServletRequest request) {
-    	
-    	UserDetails user = getUser();
-    	String roleName = getRole(user);
-    	
-    	UserEntity userEntity = userService.findUserByUsername(user.getUsername());    	
-    	request.setAttribute("roleName", roleName.toString());
-    	
-    	return new ModelAndView(PAGE_INDEX, "userEntity", userEntity);
-    }
+//    @RequestMapping(value = "/index", method = RequestMethod.GET)
+//    public ModelAndView viewStatus(HttpSession session, HttpServletRequest request) {
+//    	
+//    	UserDetails user = getUser();
+//    	String roleName = getRole(user);
+//    	
+//    	UserEntity userEntity = userService.findUserByUsername(user.getUsername());    	
+//    	request.setAttribute("roleName", roleName.toString());
+//    	
+//    	return new ModelAndView(PAGE_INDEX, "userEntity", userEntity);
+//    }
     
     @RequestMapping(value = "/security-error", method = RequestMethod.GET)
     public String securityError(RedirectAttributes redirectAttributes) {

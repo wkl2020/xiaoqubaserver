@@ -108,7 +108,7 @@
             </div>
         	
             <div class="form-group">
-              <input type="submit" value="提交"/>
+              <input type="submit" class="btn btn-default" value="提交"/>
             </div>
             
             
