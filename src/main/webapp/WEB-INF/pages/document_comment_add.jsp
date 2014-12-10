@@ -76,7 +76,7 @@
             
             <div class="form-group">
               <label for="content">公告评论内容</label>              
-              <textarea id="content" name="content" class="form-control" rows="10"></textarea>
+              <textarea id="content" name="content" class="form-control" rows="5"></textarea>
               <label id="contentMsg" style="display:none;color:red;">&nbsp;</label>
             </div>
             
