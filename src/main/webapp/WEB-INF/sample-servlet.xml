@@ -26,5 +26,17 @@
     <mvc:resources location="/WEB-INF/js/" mapping="/js/**" /> 
     <mvc:resources location="/WEB-INF/css/" mapping="/css/**" />
     <mvc:resources location="/WEB-INF/image/" mapping="/image/**" />
+    <mvc:resources location="/WEB-INF/dist/css/" mapping="/dist/css/**" />
+    <mvc:resources location="/WEB-INF/dist/css/vendor/" mapping="/dist/css/vendor/**" />
+    <mvc:resources location="/WEB-INF/dist/fonts/lato/" mapping="/dist/fonts/lato/**" />
+    <mvc:resources location="/WEB-INF/dist/fonts/glyphicons/" mapping="/dist/fonts/glyphicons/**" />
+    <mvc:resources location="/WEB-INF/dist/js/" mapping="/dist/js/**" />
+    <mvc:resources location="/WEB-INF/dist/js/vendor/" mapping="/dist/js/vendor/**" />
+    <mvc:resources location="/WEB-INF/dist/img/" mapping="/dist/img/**" />
+    <mvc:resources location="/WEB-INF/dist/img/tile/" mapping="/dist/img/tile/**" />
+    <mvc:resources location="/WEB-INF/dist/img/login/" mapping="/dist/img/login/**" />
+    <mvc:resources location="/WEB-INF/dist/img/icons/svg/" mapping="/dist/img/icons/svg/**" />
+    <mvc:resources location="/WEB-INF/dist/img/icons/png/" mapping="/dist/img/icons/png/**" />
+
          
 </beans>

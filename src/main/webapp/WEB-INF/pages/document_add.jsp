@@ -7,6 +7,8 @@
     <title>Document Add Page</title>
 	<link href='<c:url value="/main/css/jquery.ui.theme.css"/>' type="text/css" rel="stylesheet"></link>
 	<link href='<c:url value="/main/css/main.css"/>' type="text/css" rel="stylesheet"></link>
+	<link href='<c:url value="/main/dist/css/flat-ui.css"/>' type="text/css" rel="stylesheet"></link>
+	<link href='<c:url value="/main/dist/css/vendor/bootstrap.min.css"/>' type="text/css" rel="stylesheet"></link>
 	
 	<script type="text/javascript" src='<c:url value="/main/js/jquery-1.11.0.min.js"></c:url>'></script>
     
@@ -54,75 +56,66 @@
     </script>
 </head>
 <body>
+	
+<%@include file="header.jsp" %>
 
-	<div style="text-align:right;margin-right:10px;">
-		<a href="toHostManagePage"><button id="hostManageBtn">主机管理</button></a>&nbsp;
-		<a href="toUserManagePage"><button id="userManageBtn">用户管理</button></a>&nbsp;
-		<a href="toRegisterUsrPage"><button id="registerBtn">普通用户注册</button></a>&nbsp;
-		<a href="index"><button id="indexBtn">主页面</button></a>&nbsp;<a href="logout"><button id="logoutBtn">退出</button></a>&nbsp;
-	</div>
-
-<div>
-	<form id="document_add_form">
-	  <table align="center" style="padding: 100px">
-		<tr>
-			<td>小区Id* </td>
-		</tr>
-		<tr>
-			<td><input id="xiaoquId" name="xiaoquId" type="text" /> <label id="xiaoquIdMsg" style="color:red">&nbsp;</label></td>
-		</tr>
-		
-		<tr>
-			<td>文档类型 </td>
-		</tr>
-		<tr>
-			<td><input id="documentType" name="documentType" type="text" /> <label id="documentTypeMsg" style="color:red">&nbsp;</label></td>
-		</tr>
-		
-		<tr>
-			<td>文档标题* </td>
-		</tr>
-		<tr>
-			<td><input id="title" name="title" type="text" /> <label id="titleMsg" style="color:red">&nbsp;</label></td>
-		</tr>
-		
-		<tr>
-			<td>文档内容* </td>
-		</tr>
-		<tr>
-			<td><textarea id="content" name="content" rows="10" cols="80"></textarea> <label id="contentMsg" style="color:red">&nbsp;</label></td>
-		</tr>
-		
-		<tr>
-			<td>过期时间 </td>
-		</tr>
-		<tr>
-			<td><input id="expireDate" name="expireDate" type="text" /> <label id="expireDateMsg" style="color:red">&nbsp;</label></td>
-		</tr>
-		
-		<tr>
-			<td>发布者 </td>
-		</tr>
-		<tr>
-			<td><input id="owner" name="owner" type="text" /> <label id="ownerMsg" style="color:red">&nbsp;</label></td>
-		</tr>
-		
-		<tr>
-			<td>发布公司名称</td>
-		</tr>
-		<tr>
-			<td><input id="manageCompany" name="manageCompany" type="text" /> <label id="manageCompanyMsg" style="color:red">&nbsp;</label></td>
-		</tr>
-		
-		
-		
-		<tr>
-		<td><input type="submit" value="提交"/></td>
-		</tr>
-		</table>
-	</form>
-
-</div>  
+<div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h3>增加公告</h3>
+        <form id="document_add_form" role="form">
+        	
+            <div class="form-group">
+              <label for="xiaoquId">小区Id</label>              
+              <input id="xiaoquId" name="xiaoquId" class="form-control" placeholder="" type="text" />
+              <label id="xiaoquIdMsg" style="display:none;color:red;">&nbsp;</label>
+            </div>
+        	
+            <div class="form-group">
+              <label for="documentType">文档类型</label>
+              <input id="documentType" name="documentType" class="form-control" placeholder=" "type="text" />
+              <label id="documentTypeMsg" style="display:none;color:red;">&nbsp;</label>
+            </div>
+        	
+            <div class="form-group">
+              <label for="title">文档标题</label>
+              <input id="title" name="title" class="form-control" placeholder="" type="text" />
+              <label id="titleMsg" style="display:none;color:red;">&nbsp;</label>
+            </div>
+        	
+            <div class="form-group">
+              <label for="exampleInputEmail2">文档内容</label>
+              <textarea id="content" name="content" class="form-control" rows="5"></textarea>
+              <label id="contentMsg" style="display:none;color:red;">&nbsp;</label>
+            </div>
+        	
+            <div class="form-group">
+              <label for="exampleInputEmail2">过期时间</label>
+              <input id="expireDate" name="expireDate" class="form-control" placeholder="" type="text" />
+              <label id="expireDateMsg" style="display:none;color:red;">&nbsp;</label>
+            </div>
+        	
+            <div class="form-group">
+              <label for="exampleInputEmail2">发布者 </label>
+              <input id="owner" name="owner" class="form-control" placeholder="" type="text" />
+              <label id="ownerMsg" style="display:none;color:red;">&nbsp;</label>
+            </div>
+        	
+            <div class="form-group">
+              <label for="exampleInputEmail2">发布公司名称</label>
+              <input id="manageCompany" name="manageCompany" class="form-control" placeholder="" type="text" />
+              <label id="manageCompanyMsg" style="display:none;color:red;">&nbsp;</label>
+            </div>
+        	
+            <div class="form-group">
+              <input type="submit" value="提交"/>
+            </div>
+            
+            
+        </form>
+      </div>
+    </div>
+</div>
 	
 </body>
 </html>

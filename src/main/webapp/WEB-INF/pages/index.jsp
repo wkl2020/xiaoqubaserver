@@ -36,14 +36,7 @@
 </head>
 <body>
 
-	<input type="hidden" value="${userEntity.id}" id="loggedUserID" />
-	<div style="text-align:right;margin-right:10px;">
-		<a href="logout"><button id="logoutBtn">退出</button></a>&nbsp;<a href="agent-download" target="blank"><button id="downloadAgentBtn">Download Agent</button></a>&nbsp;
-		
-		<c:if test="${roleName.equals('ROLE_ADMIN')}">
-		    <a href="toAdminPage"><button id="adminBtn">进入管理页面</button></a>
-		</c:if>
-	</div> 
+<%@include file="header.jsp" %>
 	
 </body>
 </html>
