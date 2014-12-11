@@ -7,6 +7,9 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
+import net.sf.json.JSONObject;
+
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
@@ -16,12 +19,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.jun.xiaoquren.model.Document;
 import com.jun.xiaoquren.model.UserEntity;
 import com.jun.xiaoquren.service.UserService;
 import com.jun.xiaoquren.util.StringUtil;
@@ -29,6 +34,8 @@ import com.jun.xiaoquren.util.UserRole;
 
 @Controller
 public class UserController {
+	
+	private static final Logger logger = Logger.getLogger(UserController.class);  
 	
 	 @Autowired
 	 UserService userService;
@@ -78,6 +85,52 @@ public class UserController {
 		   
          return new ModelAndView("register");
      }
+		
+	@RequestMapping(value = "/user/index", method = RequestMethod.GET)
+	public @ResponseBody List<UserEntity> getAllUserEntities() {
+		    
+		List<UserEntity> allUserList = userService.findAll();
+		return allUserList;
+	}
+	 
+	 @RequestMapping(value = "/user", method = RequestMethod.POST)  
+     public @ResponseBody Object addUser(@RequestBody  UserEntity user) {  
+		
+        logger.info("Add user with name " + user.getUsername());
+        
+        String result = "failed";
+        Map<String, String> errorMsg = new HashMap<String, String>();
+        
+        String username = user.getUsername();
+        if (StringUtil.isEmpty(username)) {
+        	errorMsg.put("username", "用户名不能为空.");
+        }
+		
+        String password = user.getPassword() == null ? "" : user.getPassword();
+        if ((user.getPassword() != user.getConfirmPassword()) && !password.equals(user.getConfirmPassword())) {
+        	errorMsg.put("password", "密码和确认密码不匹配.");
+        }
+		
+		if (errorMsg.isEmpty()) {
+			try {
+				 if (userService.saveUser(user) > 0) {
+					 result = "success";
+				 }
+			 } catch (Exception e) {			 
+				 errorMsg.put("username", e.getMessage());
+			 }
+		}
+
+		JSONObject jsonObject = new JSONObject(); 
+		jsonObject.put("result", result);  
+		for (String key : errorMsg.keySet()) {
+			jsonObject.put(key, errorMsg.get(key));  
+		}
+
+        return jsonObject;  
+     }	
+	 
+	 
 	 
 	 @RequestMapping(value = "/getAllUserList", method = RequestMethod.GET)
 	 public @ResponseBody List<UserEntity> getAllUserList() { 

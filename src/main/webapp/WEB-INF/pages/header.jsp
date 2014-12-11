@@ -19,6 +19,8 @@
                 <li><a href="toUserManagePage">用户管理</a></li>
                 <li><a href="toRegisterUsrPage">用户注册</a></li>
                 <li class="divider"></li>
+                <li><a href="toXiaoquAdd">增加小区</a></li>
+                <li class="divider"></li>
                 <li><a href="toDocumentAdd">新增公告</a></li>
                 <li><a href="toDocumentCommentAdd">新增公告评论</a></li>
 				<li><a href="toDocumentEvaluationAdd">点赞公告</a></li>

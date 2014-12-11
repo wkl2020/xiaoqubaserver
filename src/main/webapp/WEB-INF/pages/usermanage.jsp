@@ -10,6 +10,7 @@
 	<link href='<c:url value="/main/css/main.css"/>' type="text/css" rel="stylesheet"></link>
 	<link href='<c:url value="/main/dist/css/flat-ui.css"/>' type="text/css" rel="stylesheet"></link>
 	<link href='<c:url value="/main/dist/css/vendor/bootstrap.min.css"/>' type="text/css" rel="stylesheet"></link>
+	<link href='<c:url value="/main/dist/css/demo.css"/>' type="text/css" rel="stylesheet"></link>
 	
 	<script type="text/javascript" src='<c:url value="/main/js/jquery-1.11.0.min.js"></c:url>'></script>
 	<script type="text/javascript" src='<c:url value="/main/js/jquery.jqGrid.min.js"></c:url>'></script>
@@ -144,41 +145,49 @@
 	
 <%@include file="header.jsp" %>
 
-	<!-- 分配用户窗口 -->
-	<div id="assignUserWindow" style="z-index:999;display:none;">
-		<div id="title" class="title">Change Password Window</div> 
-		<div class="content">		
-			<input type='hidden' id='userId'/>
+<div class="container">
+    <div class="row">
+      	<div class="col-md-12">
+      
+			<!-- 分配用户窗口 -->
+			<div id="assignUserWindow" style="z-index:999;display:none;">
+				<div id="title" class="title">Change Password Window</div> 
+				<div class="content">		
+					<input type='hidden' id='userId'/>
+					
+					New Password: <input id="newpassword" type="password">
+					
+					<table>
+						<tr>
+							<td style="text-align:right"><button id='okConfigmBtn' type='button' onclick='changeUserPwd()'>Save</button></td>
+							<td><button id='cancelAssignUserBtn' class="close" type='button'>Close</button></td>
+						</tr>
+					</table>
+				</div> 
+			</div> 
 			
-			New Password: <input id="newpassword" type="password">
+			<!-- 删除确认窗口 -->
+			<div id="delConfirmWindow" style="z-index:999;display:none;">
+				<div id="title" class="title">Delete Window</div> 
+				<div class="content">		
+					<input type='hidden' id='delUserId'/>
+					<span id="deleteMessage">&nbsp;</span>
+					<table>
+						<tr>
+							<td style="text-align:right"><button id='okConfigmBtn' type='button' onclick='deleteUser()'>OK</button></td>
+							<td><button id='cancelConfirmBtn' class="close" type='button'>Cancel</button></td>
+						</tr>
+					</table>
+				</div> 
+			</div> 
+		
 			
-			<table>
-				<tr>
-					<td style="text-align:right"><button id='okConfigmBtn' type='button' onclick='changeUserPwd()'>Save</button></td>
-					<td><button id='cancelAssignUserBtn' class="close" type='button'>Close</button></td>
-				</tr>
-			</table>
-		</div> 
-	</div> 
-	
-	<!-- 删除确认窗口 -->
-	<div id="delConfirmWindow" style="z-index:999;display:none;">
-		<div id="title" class="title">Delete Window</div> 
-		<div class="content">		
-			<input type='hidden' id='delUserId'/>
-			<span id="deleteMessage">&nbsp;</span>
-			<table>
-				<tr>
-					<td style="text-align:right"><button id='okConfigmBtn' type='button' onclick='deleteUser()'>OK</button></td>
-					<td><button id='cancelConfirmBtn' class="close" type='button'>Cancel</button></td>
-				</tr>
-			</table>
-		</div> 
-	</div> 
+			<table id="userListTable" class="table table-condensed"></table>
+			<div id="userListPager"></div>
 
-	
-	<table id="userListTable"></table>
-	<div id="userListPager"></div>
+		</div>
+	</div>
+</div>	
 	
 </body>
 </html>
