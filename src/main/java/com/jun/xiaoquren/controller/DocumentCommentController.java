@@ -54,6 +54,13 @@ public class DocumentCommentController {
 		return allDocumentCommentList;
 	}
 	
+	@RequestMapping(value = "/documentComments/{id:\\d+}", method = RequestMethod.GET)
+	public @ResponseBody List<DocumentComment> getDocumentComments(@PathVariable("id") int id) {
+		    
+		List<DocumentComment> allDocumentCommentList = documentCommentService.selectByDocumentId(id);
+		return allDocumentCommentList;
+	}
+	
 	@RequestMapping(value = "/documentComment/{id:\\d+}", method = RequestMethod.GET)  
     public @ResponseBody DocumentComment getDocumentComment(@PathVariable("id") int id) {  
 		

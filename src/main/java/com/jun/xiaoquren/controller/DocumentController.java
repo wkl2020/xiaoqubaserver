@@ -65,6 +65,13 @@ public class DocumentController {
 		return allDocumentList;
 	}
 	
+	@RequestMapping(value = "/xiaoqudocuments/{id:\\d+}", method = RequestMethod.GET)
+	public @ResponseBody List<Document> getXiaoquDocumentList(@PathVariable("id") int id) {
+		    
+		List<Document> xiaoquDocumentList = documentService.selectByXiaoquId(id);
+		return xiaoquDocumentList;
+	}
+	
 	@RequestMapping(value = "/document/{id:\\d+}", method = RequestMethod.GET)  
     public @ResponseBody Document getDocument(@PathVariable("id") int id) {  
 		
