@@ -34,6 +34,7 @@
     <include refid="Base_Column_List" />
     from document_comment
     where document_id = #{documentId,jdbcType=INTEGER}
+    order by create_date desc
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from document_comment
