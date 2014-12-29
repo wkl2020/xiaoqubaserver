@@ -168,7 +168,35 @@
 	       <groupId>org.springframework.security</groupId>  
             <artifactId>spring-security-acl</artifactId>   
 	       <version>${springsecurity.version}</version>
-	    </dependency>      
+	    </dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jms</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		 
+		<dependency>
+			<groupId>org.apache.activemq</groupId>
+			<artifactId>activemq-all</artifactId>
+			<version>5.10.0</version>
+			<exclusions>
+				<exclusion>
+					<groupId>javax.mail</groupId>
+					<artifactId>mail</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>com.sun.jdmk</groupId>
+					<artifactId>jmxtools</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>com.sun.jmx</groupId>
+					<artifactId>jmxri</artifactId>
+				</exclusion>
+			</exclusions>
+			<scope>compile</scope>
+			<!-- <scope>runtime</scope> -->
+		</dependency>
+				     
         
         <!-- Jackson JSON Mapper -->
 	    <dependency>
@@ -223,7 +251,15 @@
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>
             <version>1.2.16</version>
-        </dependency>
+			<exclusions>
+				<exclusion>
+					<groupId>javax.jms</groupId>
+					<artifactId>jms</artifactId>
+				</exclusion>
+			</exclusions> 
+			<scope>compile</scope>
+			<!-- <scope>runtime</scope>   -->     
+		</dependency>
 
         <dependency>
             <groupId>mysql</groupId>
