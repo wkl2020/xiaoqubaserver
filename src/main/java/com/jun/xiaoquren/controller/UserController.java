@@ -29,6 +29,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.jun.xiaoquren.model.Document;
 import com.jun.xiaoquren.model.UserEntity;
 import com.jun.xiaoquren.service.UserService;
+import com.jun.xiaoquren.service.impl.SimpleJMSSender;
 import com.jun.xiaoquren.util.StringUtil;
 import com.jun.xiaoquren.util.UserRole;
 
@@ -39,6 +40,9 @@ public class UserController {
 	
 	 @Autowired
 	 UserService userService;
+	 
+	 @Autowired
+	 SimpleJMSSender simpleJMSSender;
 		
 	@Autowired
 	private UserValidation userValidation; // 用户自定义验证
@@ -66,6 +70,9 @@ public class UserController {
 	 
 	 @RequestMapping(value = "/toUserManagePage", method = RequestMethod.GET)
      public ModelAndView toUserManagePage(HttpServletRequest request) {
+		 
+		 simpleJMSSender.sendMessage("KKKKKKKKK First Test MSG.");
+		 
          return new ModelAndView("usermanage");
      }
 	 
