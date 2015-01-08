@@ -29,8 +29,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.jun.xiaoquren.model.Document;
 import com.jun.xiaoquren.model.UserEntity;
+import com.jun.xiaoquren.model.Xiaoqu;
 import com.jun.xiaoquren.service.DocumentService;
+import com.jun.xiaoquren.service.XiaoquService;
 import com.jun.xiaoquren.util.StringUtil;
+import com.jun.xiaoquren.util.UserRole;
 
 @Controller
 public class DocumentController {
@@ -39,12 +42,25 @@ public class DocumentController {
 		
 	@Autowired
 	DocumentService documentService;
+	@Autowired
+	XiaoquService xiaoquService;
 		
 	@Autowired
 	private DocumentValidation documentValidation; // 用户自定义验证
 	
 	@RequestMapping(value = "/toDocumentAdd", method = RequestMethod.GET)
-    public ModelAndView toDocumentAdd(HttpServletRequest request) {
+    public ModelAndView toDocumentAdd(HttpServletRequest request, Map<String, Object> model) {
+		
+		List<Xiaoqu> xiaoquList = xiaoquService.selectAll();
+		model.put("xiaoquList", xiaoquList);
+		
+		Document document = new Document();
+		model.put("document", document);
+		
+		Map<String, String> documentTypeList = new HashMap<String, String>();  
+		documentTypeList.put("XiaoquDocument", "XiaoquDocument");  
+		model.put("documentTypeList", documentTypeList);
+		 
         return new ModelAndView("document_add");
     }
 

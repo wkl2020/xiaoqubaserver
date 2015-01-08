@@ -37,7 +37,7 @@
 
 <div class="container">
     <div class="row">
-      <div class="col-md-12">
+      <div class="col-md-6" style="margin-left:200px;">
         <h3>登录</h3>
         <form action="${pageContext.request.contextPath}/main/j_spring_security_check" method="post" role="form">
         	

@@ -55,10 +55,10 @@
 	<aop:config>
 		<aop:pointcut id="myPointCut"
 			expression="execution(* com.jun.xiaoquren.service..*.*(..))" />
-		<aop:advisor pointcut-ref="myPointCut" advice-ref="txAdvice" />
+		<aop:advisor pointcut-ref="myPointCut" advice-ref="TxAdvice" />
 	</aop:config>
 
-	<tx:advice id="txAdvice" transaction-manager="transactionManager">
+	<tx:advice id="TxAdvice" transaction-manager="transactionManager">
 		<tx:attributes>
 			<tx:method name="get*" read-only="true" />
 			<tx:method name="userLogin" read-only="true" />

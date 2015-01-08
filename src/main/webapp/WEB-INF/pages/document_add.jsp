@@ -64,17 +64,17 @@
     <div class="row">
       <div class="col-md-12">
         <h3>增加公告</h3>
-        <form id="document_add_form" role="form">
+        <form:form id="document_add_form" role="form" commandName="document" action="/xiaoqubaserver/main/empty">  
         	
             <div class="form-group">
-              <label for="xiaoquId">小区Id</label>              
-              <input id="xiaoquId" name="xiaoquId" class="form-control" placeholder="" type="text" />
+              <label for="xiaoquId">小区Id</label>
+              <form:select path="xiaoquId" items="${xiaoquList}" cssClass="form-control" itemLabel="name" itemValue="id"/>
               <label id="xiaoquIdMsg" style="display:none;color:red;">&nbsp;</label>
             </div>
         	
             <div class="form-group">
               <label for="documentType">文档类型</label>
-              <input id="documentType" name="documentType" class="form-control" placeholder=" "type="text" />
+              <form:select path="documentType" items="${documentTypeList}" cssClass="form-control"/>
               <label id="documentTypeMsg" style="display:none;color:red;">&nbsp;</label>
             </div>
         	
@@ -113,7 +113,7 @@
             </div>
             
             
-        </form>
+        </form:form>  
       </div>
     </div>
 </div>

@@ -26,12 +26,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.jun.xiaoquren.model.Document;
 import com.jun.xiaoquren.model.UserEntity;
+import com.jun.xiaoquren.model.Xiaoqu;
 import com.jun.xiaoquren.service.UserService;
 import com.jun.xiaoquren.service.impl.SimpleJMSSender;
 import com.jun.xiaoquren.util.StringUtil;
 import com.jun.xiaoquren.util.UserRole;
+import com.jun.xiaoquren.service.XiaoquService;
 
 @Controller
 public class UserController {
@@ -40,6 +41,8 @@ public class UserController {
 	
 	 @Autowired
 	 UserService userService;
+	 @Autowired
+	 XiaoquService xiaoquService;
 	 
 	 @Autowired
 	 SimpleJMSSender simpleJMSSender;
@@ -88,7 +91,10 @@ public class UserController {
 		 userRoleList.put(UserRole.NORMAL, UserRole.NORMAL);  
 		 userRoleList.put(UserRole.ANONYM, UserRole.ANONYM); 
 		 
+		 List<Xiaoqu> xiaoquList = xiaoquService.selectAll();
+		 
 		 model.put("userRoleList", userRoleList);
+		 model.put("xiaoquList", xiaoquList);
 		   
          return new ModelAndView("register");
      }
@@ -99,6 +105,24 @@ public class UserController {
 		List<UserEntity> allUserList = userService.findAll();
 		return allUserList;
 	}
+	
+	@RequestMapping(value = "/getUserbyName", method = RequestMethod.GET)
+    public @ResponseBody UserEntity getUserByUsername(@RequestParam(value="username") String username) { 
+       
+		String result = "success";
+		System.out.println("Get user by username: " + username);
+		
+		UserEntity user = null;
+	   	if (!StringUtil.isEmpty(username)) {
+	   		user = userService.findUserByUsername(username);
+	   	} else {
+	   		result = "Failed";
+	   	}
+	   	
+	   	System.out.println("result: " + result);
+	   	
+	   	return user;
+    }
 	 
 	 @RequestMapping(value = "/user", method = RequestMethod.POST)  
      public @ResponseBody Object addUser(@RequestBody  UserEntity user) {  
@@ -120,6 +144,8 @@ public class UserController {
 		
 		if (errorMsg.isEmpty()) {
 			try {
+				 user.setPassword(StringUtil.makeMD5(user.getPassword()));
+				 user.setConfirmPassword((StringUtil.makeMD5(user.getConfirmPassword())));
 				 if (userService.saveUser(user) > 0) {
 					 result = "success";
 				 }

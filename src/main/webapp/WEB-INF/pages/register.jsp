@@ -72,7 +72,7 @@
     <div class="row">
       <div class="col-md-12">
         <h3>增加公告</h3>
-        <form id="user_add_form" role="form">
+        <form:form id="user_add_form" role="form" commandName="user" action="/xiaoqubaserver/main/empty">  
         	
             <div class="form-group">
               <label for="phone">电话</label>
@@ -124,13 +124,13 @@
         	
             <div class="form-group">
               <label for="xiaoquId">小区ID</label>
-              <input id="xiaoquId" name="xiaoquId" class="form-control" placeholder="" type="text" />
+              <form:select path="xiaoquId" items="${xiaoquList}" cssClass="form-control" itemLabel="name" itemValue="id"/>
               <label id="xiaoquIdMsg" style="display:none;color:red;">&nbsp;</label>
             </div>
         	
             <div class="form-group">
               <label for="role">用户角色</label>
-              <input id="role" name="role" class="form-control" placeholder="" type="text" />
+              <form:select path="role" items="${userRoleList}" cssClass="form-control"/>
               <label id="roleMsg" style="display:none;color:red;">&nbsp;</label>
             </div>
         	
@@ -145,7 +145,7 @@
             </div>
             
             
-        </form>
+        </form:form>  
       </div>
     </div>
 </div>
