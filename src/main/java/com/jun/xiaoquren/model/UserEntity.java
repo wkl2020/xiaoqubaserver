@@ -1,9 +1,12 @@
 package com.jun.xiaoquren.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class UserEntity {
-    private Integer id;
+public class UserEntity implements Serializable {  
+	private static final long serialVersionUID = -3162178808100052645L;
+
+	private Integer id;
 
     private String confirmPassword;
 

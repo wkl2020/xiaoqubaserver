@@ -1,9 +1,12 @@
 package com.jun.xiaoquren.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class DocumentComment {
-    private Integer id;
+public class DocumentComment implements Serializable {  
+	private static final long serialVersionUID = 1013527380222699894L;
+
+	private Integer id;
 
     private Long documentId;
 

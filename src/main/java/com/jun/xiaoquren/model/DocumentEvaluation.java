@@ -1,9 +1,12 @@
 package com.jun.xiaoquren.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class DocumentEvaluation {
-    private Integer id;
+public class DocumentEvaluation implements Serializable {  
+	private static final long serialVersionUID = -196317213576636978L;
+
+	private Integer id;
 
     private Long documentId;
 
