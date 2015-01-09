@@ -200,6 +200,63 @@ public class UserController {
 		 return "register";
 	 }
 	 
+	 
+	 @RequestMapping(value = "/updateUser", method = RequestMethod.POST)  
+     public @ResponseBody Object updateUser(@RequestBody  UserEntity user) {  
+		
+        logger.info("Update user with name " + user.getUsername() + ":" + user.getNickname());
+        
+        String result = "failed";
+        UserEntity entity = null;
+        Map<String, String> errorMsg = new HashMap<String, String>();
+        
+        String username = user.getUsername();
+        if (StringUtil.isEmpty(username)) {
+        	errorMsg.put("username", "用户名不能为空.");
+        }
+		
+        String password = user.getPassword() == null ? "" : user.getPassword();
+        if ((user.getPassword() != user.getConfirmPassword()) && !password.equals(user.getConfirmPassword())) {
+        	errorMsg.put("password", "密码和确认密码不匹配.");
+        }
+		
+		if (errorMsg.isEmpty()) {
+			try {
+				entity = userService.findUserByUsername(username);
+				if (entity == null) {
+					errorMsg.put("username", "用户不存在！");
+				} else {
+					if (user.getNickname() != null && !user.getNickname().isEmpty()) { // Update nickname
+						entity.setNickname(user.getNickname());
+					}
+					
+					if (user.getPassword() != null && !user.getPassword().isEmpty()) { // Update password
+						entity.setPassword(user.getPassword());
+						entity.setConfirmPassword(user.getConfirmPassword());
+					}
+					
+					if (userService.saveUser(entity) > 0) {
+						 result = "success";
+					}
+				}
+			 } catch (Exception e) {			 
+				 errorMsg.put("username", e.getMessage());
+			 }
+		}
+
+		JSONObject jsonObject = new JSONObject(); 
+		jsonObject.put("result", result);
+		if (entity != null) {
+			jsonObject.put("nickname", entity.getNickname());
+			jsonObject.put("role", entity.getRole());
+		}
+		for (String key : errorMsg.keySet()) {
+			jsonObject.put(key, errorMsg.get(key));  
+		}
+
+        return jsonObject;  
+     }	
+	 
 	 public UserEntity getUser() {      
              //取得登录用户      
 		 	 UserEntity user = null;
