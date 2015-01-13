@@ -131,3 +131,46 @@ WITH (
 );
 ALTER TABLE document_evaluation
   OWNER TO postgres;     
+  
+  
+
+-- Table 5: parking_stall_info  
+CREATE TABLE parking_stall_info  
+(
+  id serial NOT NULL,
+  xiaoqu_id bigint NOT NULL, 
+  supply_demand_type character varying(255), -- 供需：出租、求租、出售、求购
+  your_identity character varying(255), -- 您的身份：个人、经纪人
+  price numeric, -- 元/月，元/平米/天
+  area_measure numeric,
+  address character varying(255),
+  owner character varying(255),
+  title character varying(255),
+  content text,
+  phone character varying(255),
+  nickname character varying(255),
+  read_count bigint, -- 有多少人阅读
+  sort_order bigint, -- 置顶
+  creator_id bigint,
+  updator_id bigint,
+  deleted boolean NOT NULL DEFAULT FALSE,
+  version bigint NOT NULL DEFAULT 0,
+  create_date timestamp without time zone,
+  update_date timestamp without time zone,
+  publish_date timestamp without time zone,
+  expire_date timestamp without time zone,
+  
+  CONSTRAINT parking_stall_info_pkey PRIMARY KEY (id)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE parking_stall_info
+  OWNER TO postgres;       
+  
+  
+  
+  
+  
+  
+  

@@ -24,6 +24,8 @@
                 <li><a href="toDocumentAdd">新增公告</a></li>
                 <li><a href="toDocumentCommentAdd">新增公告评论</a></li>
 				<li><a href="toDocumentEvaluationAdd">点赞公告</a></li>
+				<li class="divider"></li>
+				<li><a href="toParkingStallInfoAdd">增加车位寻租</a></li>
               </ul>
             </li>
           </ul>

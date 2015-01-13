@@ -32,6 +32,7 @@ import com.jun.xiaoquren.model.UserEntity;
 import com.jun.xiaoquren.model.Xiaoqu;
 import com.jun.xiaoquren.service.DocumentService;
 import com.jun.xiaoquren.service.XiaoquService;
+import com.jun.xiaoquren.service.impl.SimpleJMSSender;
 import com.jun.xiaoquren.util.StringUtil;
 import com.jun.xiaoquren.util.UserRole;
 
@@ -43,7 +44,9 @@ public class DocumentController {
 	@Autowired
 	DocumentService documentService;
 	@Autowired
-	XiaoquService xiaoquService;
+	XiaoquService xiaoquService;	 
+	 @Autowired
+	 SimpleJMSSender simpleJMSSender;
 		
 	@Autowired
 	private DocumentValidation documentValidation; // 用户自定义验证
@@ -135,6 +138,7 @@ public class DocumentController {
 		if (errorMsg.isEmpty()) {
 			try {
 				 if (documentService.saveDocument(document) > 0) {
+					 simpleJMSSender.sendMessage(document.getXiaoquId() + ":" + document.getTitle());
 					 result = "success";
 				 }
 			 } catch (Exception e) {			 

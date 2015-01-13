@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jun.xiaoquren.persistence.ParkingStallInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.jun.xiaoquren.model.ParkingStallInfo" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="xiaoqu_id" property="xiaoquId" jdbcType="BIGINT" />
+    <result column="supply_demand_type" property="supplyDemandType" jdbcType="VARCHAR" />
+    <result column="your_identity" property="yourIdentity" jdbcType="VARCHAR" />
+    <result column="price" property="price" jdbcType="NUMERIC" />
+    <result column="area_measure" property="areaMeasure" jdbcType="NUMERIC" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="owner" property="owner" jdbcType="VARCHAR" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="content" property="content" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="nickname" property="nickname" jdbcType="VARCHAR" />
+    <result column="read_count" property="readCount" jdbcType="BIGINT" />
+    <result column="sort_order" property="sortOrder" jdbcType="BIGINT" />
+    <result column="creator_id" property="creatorId" jdbcType="BIGINT" />
+    <result column="updator_id" property="updatorId" jdbcType="BIGINT" />
+    <result column="deleted" property="deleted" jdbcType="BIT" />
+    <result column="version" property="version" jdbcType="BIGINT" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+    <result column="publish_date" property="publishDate" jdbcType="TIMESTAMP" />
+    <result column="expire_date" property="expireDate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, xiaoqu_id, supply_demand_type, your_identity, price, area_measure, address, owner, 
+    title, content, phone, nickname, read_count, sort_order, creator_id, updator_id, 
+    deleted, version, create_date, update_date, publish_date, expire_date
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from parking_stall_info
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select 
+    <include refid="Base_Column_List" />
+    from parking_stall_info
+  </select>
+  <select id="selectByXiaoquId" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from parking_stall_info
+    where xiaoqu_id = #{xiaoquId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from parking_stall_info
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.jun.xiaoquren.model.ParkingStallInfo" >
+    insert into parking_stall_info (xiaoqu_id, supply_demand_type, 
+      your_identity, price, area_measure, 
+      address, owner, title, 
+      content, phone, nickname, 
+      read_count, sort_order, creator_id, 
+      updator_id, deleted, version, 
+      create_date, update_date, publish_date, 
+      expire_date)
+    values (#{xiaoquId,jdbcType=BIGINT}, #{supplyDemandType,jdbcType=VARCHAR}, 
+      #{yourIdentity,jdbcType=VARCHAR}, #{price,jdbcType=NUMERIC}, #{areaMeasure,jdbcType=NUMERIC}, 
+      #{address,jdbcType=VARCHAR}, #{owner,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, 
+      #{content,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{nickname,jdbcType=VARCHAR}, 
+      #{readCount,jdbcType=BIGINT}, #{sortOrder,jdbcType=BIGINT}, #{creatorId,jdbcType=BIGINT}, 
+      #{updatorId,jdbcType=BIGINT}, #{deleted,jdbcType=BIT}, #{version,jdbcType=BIGINT}, 
+      #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP}, #{publishDate,jdbcType=TIMESTAMP}, 
+      #{expireDate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jun.xiaoquren.model.ParkingStallInfo" >
+    insert into parking_stall_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="xiaoquId != null" >
+        xiaoqu_id,
+      </if>
+      <if test="supplyDemandType != null" >
+        supply_demand_type,
+      </if>
+      <if test="yourIdentity != null" >
+        your_identity,
+      </if>
+      <if test="price != null" >
+        price,
+      </if>
+      <if test="areaMeasure != null" >
+        area_measure,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+      <if test="owner != null" >
+        owner,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+      <if test="phone != null" >
+        phone,
+      </if>
+      <if test="nickname != null" >
+        nickname,
+      </if>
+      <if test="readCount != null" >
+        read_count,
+      </if>
+      <if test="sortOrder != null" >
+        sort_order,
+      </if>
+      <if test="creatorId != null" >
+        creator_id,
+      </if>
+      <if test="updatorId != null" >
+        updator_id,
+      </if>
+      <if test="deleted != null" >
+        deleted,
+      </if>
+      <if test="version != null" >
+        version,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="updateDate != null" >
+        update_date,
+      </if>
+      <if test="publishDate != null" >
+        publish_date,
+      </if>
+      <if test="expireDate != null" >
+        expire_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="xiaoquId != null" >
+        #{xiaoquId,jdbcType=BIGINT},
+      </if>
+      <if test="supplyDemandType != null" >
+        #{supplyDemandType,jdbcType=VARCHAR},
+      </if>
+      <if test="yourIdentity != null" >
+        #{yourIdentity,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=NUMERIC},
+      </if>
+      <if test="areaMeasure != null" >
+        #{areaMeasure,jdbcType=NUMERIC},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="owner != null" >
+        #{owner,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="nickname != null" >
+        #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="readCount != null" >
+        #{readCount,jdbcType=BIGINT},
+      </if>
+      <if test="sortOrder != null" >
+        #{sortOrder,jdbcType=BIGINT},
+      </if>
+      <if test="creatorId != null" >
+        #{creatorId,jdbcType=BIGINT},
+      </if>
+      <if test="updatorId != null" >
+        #{updatorId,jdbcType=BIGINT},
+      </if>
+      <if test="deleted != null" >
+        #{deleted,jdbcType=BIT},
+      </if>
+      <if test="version != null" >
+        #{version,jdbcType=BIGINT},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null" >
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="publishDate != null" >
+        #{publishDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="expireDate != null" >
+        #{expireDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jun.xiaoquren.model.ParkingStallInfo" >
+    update parking_stall_info
+    <set >
+      <if test="xiaoquId != null" >
+        xiaoqu_id = #{xiaoquId,jdbcType=BIGINT},
+      </if>
+      <if test="supplyDemandType != null" >
+        supply_demand_type = #{supplyDemandType,jdbcType=VARCHAR},
+      </if>
+      <if test="yourIdentity != null" >
+        your_identity = #{yourIdentity,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        price = #{price,jdbcType=NUMERIC},
+      </if>
+      <if test="areaMeasure != null" >
+        area_measure = #{areaMeasure,jdbcType=NUMERIC},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="owner != null" >
+        owner = #{owner,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="nickname != null" >
+        nickname = #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="readCount != null" >
+        read_count = #{readCount,jdbcType=BIGINT},
+      </if>
+      <if test="sortOrder != null" >
+        sort_order = #{sortOrder,jdbcType=BIGINT},
+      </if>
+      <if test="creatorId != null" >
+        creator_id = #{creatorId,jdbcType=BIGINT},
+      </if>
+      <if test="updatorId != null" >
+        updator_id = #{updatorId,jdbcType=BIGINT},
+      </if>
+      <if test="deleted != null" >
+        deleted = #{deleted,jdbcType=BIT},
+      </if>
+      <if test="version != null" >
+        version = #{version,jdbcType=BIGINT},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null" >
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="publishDate != null" >
+        publish_date = #{publishDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="expireDate != null" >
+        expire_date = #{expireDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jun.xiaoquren.model.ParkingStallInfo" >
+    update parking_stall_info
+    set xiaoqu_id = #{xiaoquId,jdbcType=BIGINT},
+      supply_demand_type = #{supplyDemandType,jdbcType=VARCHAR},
+      your_identity = #{yourIdentity,jdbcType=VARCHAR},
+      price = #{price,jdbcType=NUMERIC},
+      area_measure = #{areaMeasure,jdbcType=NUMERIC},
+      address = #{address,jdbcType=VARCHAR},
+      owner = #{owner,jdbcType=VARCHAR},
+      title = #{title,jdbcType=VARCHAR},
+      content = #{content,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      nickname = #{nickname,jdbcType=VARCHAR},
+      read_count = #{readCount,jdbcType=BIGINT},
+      sort_order = #{sortOrder,jdbcType=BIGINT},
+      creator_id = #{creatorId,jdbcType=BIGINT},
+      updator_id = #{updatorId,jdbcType=BIGINT},
+      deleted = #{deleted,jdbcType=BIT},
+      version = #{version,jdbcType=BIGINT},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      publish_date = #{publishDate,jdbcType=TIMESTAMP},
+      expire_date = #{expireDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
