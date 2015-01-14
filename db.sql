@@ -142,6 +142,7 @@ CREATE TABLE parking_stall_info
   supply_demand_type character varying(255), -- 供需：出租、求租、出售、求购
   your_identity character varying(255), -- 您的身份：个人、经纪人
   price numeric, -- 元/月，元/平米/天
+  price_unit character varying(255),
   area_measure numeric,
   address character varying(255),
   owner character varying(255),
@@ -170,7 +171,7 @@ ALTER TABLE parking_stall_info
   
   
   
-  
+--ALTER TABLE parking_stall_info add price_unit character varying(255);
   
   
   

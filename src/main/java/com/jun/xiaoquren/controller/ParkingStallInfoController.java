@@ -56,11 +56,16 @@ public class ParkingStallInfoController {
 		supplyDemandTypeList.put("求租", "求租"); 
 		model.put("supplyDemandTypeList", supplyDemandTypeList);
 		
-		
 		Map<String, String> yourIdentityList = new HashMap<String, String>();  
 		yourIdentityList.put("个人", "个人");
 		yourIdentityList.put("经纪人", "经纪人"); 
 		model.put("yourIdentityList", yourIdentityList);
+		
+		Map<String, String> priceUnitList = new HashMap<String, String>();  
+		priceUnitList.put("元/月", "元/月");
+		priceUnitList.put("元/平米/天", "元/平米/天"); 
+		model.put("priceUnitList", priceUnitList);
+		
 		 
         return new ModelAndView("parking_stall_info_add");
     }

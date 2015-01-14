@@ -30,12 +30,13 @@
 				var address = $("#address").val();
 				var areaMeasure = $("#areaMeasure").val();
 				var price = $("#price").val();
+				var priceUnit = $("#priceUnit").val();				
 				var nickname = $("#nickname").val();
 				var phone = $("#phone").val();				
 				var title = $("#title").val();
 				var content = $("#content").val();
 				
-				var json_parking_stall_info = {'xiaoquId': xiaoquId, 'supplyDemandType': supplyDemandType, 'yourIdentity': yourIdentity, 'address': address, 'areaMeasure': areaMeasure, 'price': price, 'nickname': nickname, 'phone':phone, 'title': title, 'content': content};
+				var json_parking_stall_info = {'xiaoquId': xiaoquId, 'supplyDemandType': supplyDemandType, 'yourIdentity': yourIdentity, 'address': address, 'areaMeasure': areaMeasure, 'price': price, 'priceUnit': priceUnit, 'nickname': nickname, 'phone':phone, 'title': title, 'content': content};
 				
 				alert(JSON.stringify(json_parking_stall_info));
                 jQuery.ajax({  
@@ -103,6 +104,12 @@
               <label for="price">租金</label>
               <input id="price" name="title" class="form-control" placeholder="" type="text" />
               <label id="priceMsg" style="display:none;color:red;">&nbsp;</label>
+            </div>
+            
+            <div class="form-group">
+              <label for="priceUnit">租金单位</label>
+              <form:select path="priceUnit" items="${priceUnitList}" cssClass="form-control"/>
+              <label id="priceUnit" style="display:none;color:red;">&nbsp;</label>
             </div>
             
             <div class="form-group">

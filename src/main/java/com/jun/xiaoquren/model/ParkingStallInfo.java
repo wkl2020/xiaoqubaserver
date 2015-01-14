@@ -1,13 +1,10 @@
 package com.jun.xiaoquren.model;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class ParkingStallInfo implements Serializable { 
-	private static final long serialVersionUID = -969126406927530839L;
-
-	private Integer id;
+public class ParkingStallInfo {
+    private Integer id;
 
     private Long xiaoquId;
 
@@ -50,6 +47,8 @@ public class ParkingStallInfo implements Serializable {
     private Date publishDate;
 
     private Date expireDate;
+
+    private String priceUnit;
 
     public Integer getId() {
         return id;
@@ -225,5 +224,13 @@ public class ParkingStallInfo implements Serializable {
 
     public void setExpireDate(Date expireDate) {
         this.expireDate = expireDate;
+    }
+
+    public String getPriceUnit() {
+        return priceUnit;
+    }
+
+    public void setPriceUnit(String priceUnit) {
+        this.priceUnit = priceUnit == null ? null : priceUnit.trim();
     }
 }

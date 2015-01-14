@@ -24,11 +24,12 @@
     <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
     <result column="publish_date" property="publishDate" jdbcType="TIMESTAMP" />
     <result column="expire_date" property="expireDate" jdbcType="TIMESTAMP" />
+    <result column="price_unit" jdbcType="VARCHAR" property="priceUnit" />
   </resultMap>
   <sql id="Base_Column_List" >
     id, xiaoqu_id, supply_demand_type, your_identity, price, area_measure, address, owner, 
     title, content, phone, nickname, read_count, sort_order, creator_id, updator_id, 
-    deleted, version, create_date, update_date, publish_date, expire_date
+    deleted, version, create_date, update_date, publish_date, expire_date, price_unit
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -59,7 +60,7 @@
       read_count, sort_order, creator_id, 
       updator_id, deleted, version, 
       create_date, update_date, publish_date, 
-      expire_date)
+      expire_date, price_unit)
     values (#{xiaoquId,jdbcType=BIGINT}, #{supplyDemandType,jdbcType=VARCHAR}, 
       #{yourIdentity,jdbcType=VARCHAR}, #{price,jdbcType=NUMERIC}, #{areaMeasure,jdbcType=NUMERIC}, 
       #{address,jdbcType=VARCHAR}, #{owner,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, 
@@ -67,7 +68,7 @@
       #{readCount,jdbcType=BIGINT}, #{sortOrder,jdbcType=BIGINT}, #{creatorId,jdbcType=BIGINT}, 
       #{updatorId,jdbcType=BIGINT}, #{deleted,jdbcType=BIT}, #{version,jdbcType=BIGINT}, 
       #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP}, #{publishDate,jdbcType=TIMESTAMP}, 
-      #{expireDate,jdbcType=TIMESTAMP})
+      #{expireDate,jdbcType=TIMESTAMP}, #{priceUnit,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.jun.xiaoquren.model.ParkingStallInfo" >
     insert into parking_stall_info
@@ -138,6 +139,9 @@
       <if test="expireDate != null" >
         expire_date,
       </if>
+      <if test="priceUnit != null">
+        price_unit,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -205,6 +209,9 @@
       </if>
       <if test="expireDate != null" >
         #{expireDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="priceUnit != null">
+        #{priceUnit,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -274,6 +281,9 @@
       <if test="expireDate != null" >
         expire_date = #{expireDate,jdbcType=TIMESTAMP},
       </if>
+      <if test="priceUnit != null">
+        price_unit = #{priceUnit,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -299,7 +309,8 @@
       create_date = #{createDate,jdbcType=TIMESTAMP},
       update_date = #{updateDate,jdbcType=TIMESTAMP},
       publish_date = #{publishDate,jdbcType=TIMESTAMP},
-      expire_date = #{expireDate,jdbcType=TIMESTAMP}
+      expire_date = #{expireDate,jdbcType=TIMESTAMP},
+      price_unit = #{priceUnit,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>
