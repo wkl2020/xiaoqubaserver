@@ -25,6 +25,7 @@
     		    	    
     	    $("#parking_stall_info_add_form").submit(function() {
 				var xiaoquId = $("#xiaoquId").val();
+				var owner = $("#owner").val();
 				var supplyDemandType = $("#supplyDemandType").val();
 				var yourIdentity = $("#yourIdentity").val();
 				var address = $("#address").val();
@@ -36,7 +37,7 @@
 				var title = $("#title").val();
 				var content = $("#content").val();
 				
-				var json_parking_stall_info = {'xiaoquId': xiaoquId, 'supplyDemandType': supplyDemandType, 'yourIdentity': yourIdentity, 'address': address, 'areaMeasure': areaMeasure, 'price': price, 'priceUnit': priceUnit, 'nickname': nickname, 'phone':phone, 'title': title, 'content': content};
+				var json_parking_stall_info = {'xiaoquId': xiaoquId, 'owner': owner, 'supplyDemandType': supplyDemandType, 'yourIdentity': yourIdentity, 'address': address, 'areaMeasure': areaMeasure, 'price': price, 'priceUnit': priceUnit, 'nickname': nickname, 'phone':phone, 'title': title, 'content': content};
 				
 				alert(JSON.stringify(json_parking_stall_info));
                 jQuery.ajax({  
@@ -74,6 +75,12 @@
               <label for="xiaoquId">小区Id</label>
               <form:select path="xiaoquId" items="${xiaoquList}" cssClass="form-control" itemLabel="name" itemValue="id"/>
               <label id="xiaoquIdMsg" style="display:none;color:red;">&nbsp;</label>
+            </div>
+            
+            <div class="form-group">
+              <label for="owner">发布人</label>
+              <form:select path="owner" items="${ownerList}" cssClass="form-control" itemLabel="username" itemValue="id"/>
+              <label id="ownerMsg" style="display:none;color:red;">&nbsp;</label>
             </div>
         	
             <div class="form-group">

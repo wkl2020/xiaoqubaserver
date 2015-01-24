@@ -26,6 +26,7 @@
 				<li><a href="toDocumentEvaluationAdd">点赞公告</a></li>
 				<li class="divider"></li>
 				<li><a href="toParkingStallInfoAdd">增加车位寻租</a></li>
+				<li><a href="toParkingStallInfoList">车位信息列表</a></li>
               </ul>
             </li>
           </ul>

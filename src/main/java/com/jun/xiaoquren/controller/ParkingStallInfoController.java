@@ -26,6 +26,7 @@ import com.jun.xiaoquren.model.ParkingStallInfo;
 import com.jun.xiaoquren.model.UserEntity;
 import com.jun.xiaoquren.model.Xiaoqu;
 import com.jun.xiaoquren.service.ParkingStallInfoService;
+import com.jun.xiaoquren.service.UserService;
 import com.jun.xiaoquren.service.XiaoquService;
 import com.jun.xiaoquren.util.StringUtil;
 
@@ -38,6 +39,8 @@ public class ParkingStallInfoController {
 	ParkingStallInfoService parkingStallInfoService;
 	@Autowired
 	XiaoquService xiaoquService;
+	@Autowired
+	UserService userService;
 		
 	@Autowired
 	private ParkingStallInfoValidation parkingStallInfoValidation; // 用户自定义验证
@@ -47,6 +50,8 @@ public class ParkingStallInfoController {
 		
 		List<Xiaoqu> xiaoquList = xiaoquService.selectAll();
 		model.put("xiaoquList", xiaoquList);
+		
+		model.put("ownerList", userService.findAll());
 		
 		ParkingStallInfo parkingStallInfo = new ParkingStallInfo();
 		model.put("parkingStallInfo", parkingStallInfo);
@@ -63,7 +68,7 @@ public class ParkingStallInfoController {
 		
 		Map<String, String> priceUnitList = new HashMap<String, String>();  
 		priceUnitList.put("元/月", "元/月");
-		priceUnitList.put("元/平米/天", "元/平米/天"); 
+		priceUnitList.put("元/天", "元/天"); 
 		model.put("priceUnitList", priceUnitList);
 		
 		 
