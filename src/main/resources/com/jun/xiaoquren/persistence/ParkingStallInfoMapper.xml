@@ -42,6 +42,30 @@
     <include refid="Base_Column_List" />
     from parking_stall_info
   </select>
+  
+  <select id="search" resultMap="BaseResultMap" parameterType="com.jun.xiaoquren.model.search.ParkingStallInfoSearch" >
+    select 
+    <include refid="Base_Column_List" />
+    from parking_stall_info
+    where xiaoqu_id = #{xiaoquId,jdbcType=BIGINT} 
+      <if test="supplyDemandType != null" >
+        and supply_demand_type = #{supplyDemandType,jdbcType=VARCHAR} 
+      </if>
+      <if test="yourIdentity != null" >
+        and your_identity = #{yourIdentity,jdbcType=VARCHAR}
+      </if>
+      <if test="price != null" >
+        and price = #{price,jdbcType=NUMERIC}
+      </if>
+      <if test="areaMeasure != null" >
+        and area_measure = #{areaMeasure,jdbcType=NUMERIC}
+      </if>
+    <if test="sidx != null" >
+      order by #{sidx,jdbcType=VARCHAR} #{sord,jdbcType=VARCHAR}
+    </if>
+     limit #{pageSize,jdbcType=INTEGER} offset #{offset,jdbcType=INTEGER};
+  </select>
+  
   <select id="selectByXiaoquId" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />

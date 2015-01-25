@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.jun.xiaoquren.exception.InvalidDataException;
 import com.jun.xiaoquren.model.ParkingStallInfo;
+import com.jun.xiaoquren.model.search.ParkingStallInfoSearch;
 import com.jun.xiaoquren.persistence.ParkingStallInfoMapper;
 import com.jun.xiaoquren.service.ParkingStallInfoService;
 
@@ -51,6 +52,11 @@ public class ParkingStallInfoServiceImpl implements ParkingStallInfoService {
 	@Override
 	public ParkingStallInfo selectByPrimaryKey(Integer id) throws InvalidDataException {
 		return parkingStallInfoMapper.selectByPrimaryKey(id);
+	}
+
+	@Override
+	public List<ParkingStallInfo> search(ParkingStallInfoSearch obj) throws InvalidDataException {		
+		return parkingStallInfoMapper.search(obj);
 	}
 
 	@Override

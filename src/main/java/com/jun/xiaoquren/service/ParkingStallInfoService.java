@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.jun.xiaoquren.exception.InvalidDataException;
 import com.jun.xiaoquren.model.ParkingStallInfo;
+import com.jun.xiaoquren.model.search.ParkingStallInfoSearch;
 
 public interface ParkingStallInfoService {
 	
@@ -16,6 +17,8 @@ public interface ParkingStallInfoService {
     ParkingStallInfo selectByPrimaryKey(Integer id) throws InvalidDataException;
     
     List<ParkingStallInfo> selectAll() throws InvalidDataException;
+    
+    List<ParkingStallInfo> search(ParkingStallInfoSearch obj) throws InvalidDataException;
     
     List<ParkingStallInfo> selectByXiaoquId(Integer xiaoquId) throws InvalidDataException;
 

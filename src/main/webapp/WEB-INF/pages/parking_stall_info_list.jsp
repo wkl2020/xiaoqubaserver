@@ -33,7 +33,7 @@
     		
 		
 			$("#parkingListTable").jqGrid({
-    			url:'/xiaoqubaserver/main/parking_stall_info/index',
+    			url:'/xiaoqubaserver/main/parking_stall_info/index?xiaoquId=1',
     			datatype: "json",
     			height: 450,
     			colNames:['ID', $.i18n.prop('parking.list.xiaoquId'), $.i18n.prop('parking.list.owner'), $.i18n.prop('parking.list.supplyDemandType'), $.i18n.prop('parking.list.yourIdentity'), $.i18n.prop('parking.list.price'), $.i18n.prop('parking.list.areaMeasure'), $.i18n.prop('parking.list.phone'), $.i18n.prop('parking.list.nickname'), $.i18n.prop('parking.list.commandCol')], 
@@ -52,7 +52,8 @@
     			rowNum:10,
     			rowList:[10,20,30],
     			pager: '#parkingListPager',
-    			sortname: 'id',
+    			sortname: 'create_date',
+				sortorder: 'desc',
     			viewrecords: true,
     			multiselect: false,
 				caption: "停车位信息",

@@ -19,15 +19,18 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.jun.xiaoquren.model.ParkingStallInfo;
 import com.jun.xiaoquren.model.UserEntity;
 import com.jun.xiaoquren.model.Xiaoqu;
+import com.jun.xiaoquren.model.search.ParkingStallInfoSearch;
 import com.jun.xiaoquren.service.ParkingStallInfoService;
 import com.jun.xiaoquren.service.UserService;
 import com.jun.xiaoquren.service.XiaoquService;
+import com.jun.xiaoquren.util.HttpParamUtil;
 import com.jun.xiaoquren.util.StringUtil;
 
 @Controller
@@ -86,10 +89,31 @@ public class ParkingStallInfoController {
     }
 	
 	@RequestMapping(value = "/parking_stall_info/index", method = RequestMethod.GET)
-	public @ResponseBody List<ParkingStallInfo> getAllParkingStallInfoList() {
-		    
+	public @ResponseBody List<ParkingStallInfo> getAllParkingStallInfoList(@RequestParam(value="xiaoquId") String xiaoquId,
+			@RequestParam(required=false, value="rows", defaultValue="10") Integer rows, 
+			@RequestParam(required=false, value="page", defaultValue="1") Integer page, 
+			@RequestParam(required=false, value="sidx", defaultValue="create_date") String sidx, 
+			@RequestParam(required=false, value="sord", defaultValue="desc") String sord) {
+		
+		ParkingStallInfoSearch searchObj = new ParkingStallInfoSearch();
+		searchObj.setXiaoquId(HttpParamUtil.getIntByString(xiaoquId));
+		searchObj.setPage(page);
+		searchObj.setRows(rows);
+		searchObj.setSidx(HttpParamUtil.getSortColumnNmae(sidx));
+		searchObj.setSord(HttpParamUtil.getSortDesc(sord));
+		
 		List<ParkingStallInfo> allParkingStallInfoList = parkingStallInfoService.selectAll();
 		return allParkingStallInfoList;
+	}
+	
+	@RequestMapping(value = "/parking_stall_info_search", method = RequestMethod.POST)  
+    public @ResponseBody List<ParkingStallInfo> search(@RequestBody ParkingStallInfoSearch searchObj) {  
+		searchObj.setSidx(HttpParamUtil.getSortColumnNmae(searchObj.getSidx()));
+		searchObj.setSord(HttpParamUtil.getSortDesc(searchObj.getSord()));
+		// TODO search content validation
+		
+		List<ParkingStallInfo> xiaoquParkingStallInfoList = parkingStallInfoService.search(searchObj);
+		return xiaoquParkingStallInfoList;
 	}
 	
 	@RequestMapping(value = "/xiaoqu_parking_stall_infos/{id:\\d+}", method = RequestMethod.GET)
