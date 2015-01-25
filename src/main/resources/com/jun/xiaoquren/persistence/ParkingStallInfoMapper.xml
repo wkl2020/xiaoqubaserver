@@ -52,18 +52,18 @@
         and supply_demand_type = #{supplyDemandType,jdbcType=VARCHAR} 
       </if>
       <if test="yourIdentity != null" >
-        and your_identity = #{yourIdentity,jdbcType=VARCHAR}
+        and your_identity = #{yourIdentity,jdbcType=VARCHAR} 
       </if>
       <if test="price != null" >
-        and price = #{price,jdbcType=NUMERIC}
+        and price = #{price,jdbcType=NUMERIC} 
       </if>
       <if test="areaMeasure != null" >
-        and area_measure = #{areaMeasure,jdbcType=NUMERIC}
+        and area_measure = #{areaMeasure,jdbcType=NUMERIC} 
       </if>
-    <if test="sidx != null" >
-      order by #{sidx,jdbcType=VARCHAR} #{sord,jdbcType=VARCHAR}
-    </if>
-     limit #{pageSize,jdbcType=INTEGER} offset #{offset,jdbcType=INTEGER};
+	  <if test="sidx != null" >
+	    order by ${sidx} ${sord} 
+	  </if>
+      limit ${pageSize} offset ${offset}
   </select>
   
   <select id="selectByXiaoquId" resultMap="BaseResultMap" parameterType="java.lang.Integer" >

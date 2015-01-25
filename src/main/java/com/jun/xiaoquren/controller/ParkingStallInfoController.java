@@ -102,7 +102,7 @@ public class ParkingStallInfoController {
 		searchObj.setSidx(HttpParamUtil.getSortColumnNmae(sidx));
 		searchObj.setSord(HttpParamUtil.getSortDesc(sord));
 		
-		List<ParkingStallInfo> allParkingStallInfoList = parkingStallInfoService.selectAll();
+		List<ParkingStallInfo> allParkingStallInfoList = parkingStallInfoService.search(searchObj);
 		return allParkingStallInfoList;
 	}
 	
